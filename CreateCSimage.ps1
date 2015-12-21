@@ -4,7 +4,7 @@ param(
 [String]$ReplaceDBUser,
 [String]$ReplaceDBPassword)
 
-$file = "C:\OPENTEXT\OTCS\config\autoconfig.xml"
+$file = "C:\OPENTEXT\config\autoconfig.xml"
 $StrDBServer = "DBServer"
 $StrDBName = "DBName"
 $StrDBUser = "DBUser"
