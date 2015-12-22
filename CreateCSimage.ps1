@@ -31,7 +31,17 @@ Write-Host $ReplaceAPassword
 Write-Host "End: Replace Parameter in autoconfig.xml"
 
 # Start Services
-cmd.exe /c '\configOTCS.bat'
+start-service OTCS
+
+Set-Service –Name OTCS –StartupType “Automatic” 
+
+Write-Host "Set Service Content Server (OTCS) to Automatic and Status Running"
+
+start-service OTCSAdmin
+
+Set-Service –Name OTCSAdmin –StartupType “Automatic” 
+
+Write-Host "Set Service Content Server Admin (OTCS) to Automatic and Status Running"
 
 Write-Host "Start: auto creation Content Server"
 
