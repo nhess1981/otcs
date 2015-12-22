@@ -19,6 +19,7 @@ Set-Service –Name OTCSAdmin –StartupType "Automatic"
 Write-Host "Set Service Content Server Admin (OTCS) to Automatic and Status Running"
 
 Write-Host "Start: Replace Parameter in autoconfig.xml"
+
 # Wait 60 sec
 Start-Sleep -s 60
 
