@@ -33,20 +33,20 @@ Write-Host "End: Replace Parameter in autoconfig.xml"
 # Start Services
 start-service OTCS
 
-Set-Service –Name OTCS –StartupType "Automatic" 
+#Set-Service –Name OTCS –StartupType "Automatic" 
 
 Write-Host "Set Service Content Server (OTCS) to Automatic and Status Running"
 
 start-service OTCSAdmin
 
-Set-Service –Name OTCSAdmin –StartupType "Automatic" 
+#Set-Service –Name OTCSAdmin –StartupType "Automatic" 
 
 Write-Host "Set Service Content Server Admin (OTCS) to Automatic and Status Running"
 
 Write-Host "Start: auto creation Content Server"
 
-$url = "http://localhost/OTCS/cs.exe?func=admin.autoconfig"
-$result = Invoke-WebRequest $url
+#$url = "http://localhost/OTCS/cs.exe?func=admin.autoconfig"
+#$result = Invoke-WebRequest $url
 
 Write-Host $result
 
