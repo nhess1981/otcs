@@ -5,6 +5,19 @@ param(
 [String]$ReplaceDBPassword,
 [String]$ReplaceAPassword)
 
+# Start Services
+start-service OTCS
+
+Set-Service –Name OTCS –StartupType "Automatic" 
+
+Write-Host "Set Service Content Server (OTCS) to Automatic and Status Running"
+
+start-service OTCSAdmin
+
+Set-Service –Name OTCSAdmin –StartupType "Automatic" 
+
+Write-Host "Set Service Content Server Admin (OTCS) to Automatic and Status Running"
+
 Write-Host "Start: Replace Parameter in autoconfig.xml"
 
 $file = "C:\OPENTEXT\config\autoconfig.xml"
@@ -29,19 +42,6 @@ Write-Host $ReplaceAPassword
 (Get-Content $file) -replace $StrAPassword, $ReplaceAPassword | Set-Content $file
 
 Write-Host "End: Replace Parameter in autoconfig.xml"
-
-# Start Services
-start-service OTCS
-
-Set-Service –Name OTCS –StartupType "Automatic" 
-
-Write-Host "Set Service Content Server (OTCS) to Automatic and Status Running"
-
-start-service OTCSAdmin
-
-Set-Service –Name OTCSAdmin –StartupType "Automatic" 
-
-Write-Host "Set Service Content Server Admin (OTCS) to Automatic and Status Running"
 
 Write-Host "Start: auto creation Content Server"
 
