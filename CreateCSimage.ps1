@@ -8,20 +8,20 @@ param(
 # Start Services
 start-service OTCS
 
-Set-Service –Name OTCS –StartupType "Automatic" 
+set-service –name OTCS –startuptype automatic 
 
 Write-Host "Set Service Content Server (OTCS) to Automatic and Status Running"
 
 start-service OTCSAdmin
 
-Set-Service –Name OTCSAdmin –StartupType "Automatic" 
+set-service –name OTCSAdmin –startuptype automatic 
 
 Write-Host "Set Service Content Server Admin (OTCS) to Automatic and Status Running"
 
 Write-Host "Start: Replace Parameter in autoconfig.xml"
 
 # Wait 60 sec
-Start-Sleep -s 60
+start-sleep -s 60
 
 $file = "C:\OPENTEXT\config\autoconfig.xml"
 $StrDBServer = "DBServer"
