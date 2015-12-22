@@ -20,6 +20,8 @@ Write-Host "Set Service Content Server Admin (OTCS) to Automatic and Status Runn
 
 Write-Host "Start: Replace Parameter in autoconfig.xml"
 
+Start-Sleep -s 60
+
 $file = "C:\OPENTEXT\config\autoconfig.xml"
 $StrDBServer = "DBServer"
 $StrDBName = "DBName"
