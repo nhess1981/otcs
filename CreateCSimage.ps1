@@ -50,7 +50,7 @@ Write-Host "Start: auto creation Content Server"
 
 $url = "http://localhost/OTCS/cs.exe?func=admin.autoconfig"
 
-$result = Invoke-WebRequest $url -OutFile "C:\OPENTEXT\logs\deployment.log" -TimeoutSec 360
+$result = Invoke-WebRequest $url -OutFile "C:\OPENTEXT\logs\deployment.log" -TimeoutSec 360 -UseBasicParsing
 
 Write-Host $result
 
