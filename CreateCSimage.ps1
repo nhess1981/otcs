@@ -54,4 +54,6 @@ $XML = "http://localhost/OTCS/cs.exe?func=admin.autoconfig"
 
 Start-Process $IE $XML
 
+Write-Host "Run "+$XML
+
 Write-Host "End: auto creation Content Server"
