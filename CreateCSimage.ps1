@@ -48,10 +48,10 @@ Write-Host "End: Replace Parameter in autoconfig.xml"
 
 Write-Host "Start: auto creation Content Server"
 
-$url = "http://localhost/OTCS/cs.exe?func=admin.autoconfig"
+$IE = "C:\Program Files\Internet Explorer\iexplore.exe"
 
-$result = Invoke-WebRequest $url -UseBasicParsing
+$XML = "http://localhost/OTCS/cs.exe?func=admin.autoconfig"
 
-Write-Host $result
+Start-Process $IE $XML
 
 Write-Host "End: auto creation Content Server"
