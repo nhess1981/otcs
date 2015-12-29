@@ -55,4 +55,9 @@ $result = Invoke-WebRequest $url -UseBasicParsing
 
 Write-Host $result
 
+$url2 = "http://localhost/OTCS/cs.exe?func=ll.index"
+$result2 = Invoke-WebRequest $url2
+
+Write-Host $result2
+
 Write-Host "End: auto creation Content Server"
