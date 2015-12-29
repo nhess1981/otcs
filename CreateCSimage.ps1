@@ -49,15 +49,9 @@ Write-Host "End: Replace Parameter in autoconfig.xml"
 Write-Host "Start: auto creation Content Server"
 
 $url = "http://localhost/OTCS/cs.exe?func=admin.autoconfig"
-# Wait 60 sec
-start-sleep -s 60
-$result = Invoke-WebRequest $url -UseBasicParsing
+
+$result = Invoke-WebRequest $url -OutFile "C:\OPENTEXT\logs\deployment.log" -TimeoutSec 360
 
 Write-Host $result
-
-$url2 = "http://localhost/OTCS/cs.exe?func=ll.index"
-$result2 = Invoke-WebRequest $url2
-
-Write-Host $result2
 
 Write-Host "End: auto creation Content Server"
