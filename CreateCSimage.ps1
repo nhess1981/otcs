@@ -49,7 +49,7 @@ Write-Host "End: Replace Parameter in autoconfig.xml"
 Write-Host "Start: auto creation Content Server"
 
 $url = "http://localhost/OTCS/cs.exe?func=admin.autoconfig"
-$result = Invoke-WebRequest $url
+$result = Invoke-WebRequest $url -UseBasicParsing
 
 Write-Host $result
 
