@@ -21,7 +21,7 @@ Write-Host "Set Service Content Server Admin (OTCS) to Automatic and Status Runn
 Write-Host "Start: Replace Parameter in autoconfig.xml"
 
 # Wait 60 sec
-# start-sleep -s 60
+start-sleep -s 60
 
 $file = "C:\OPENTEXT\config\autoconfig.xml"
 $StrDBServer = "DBServer"
@@ -49,7 +49,8 @@ Write-Host "End: Replace Parameter in autoconfig.xml"
 Write-Host "Start: auto creation Content Server"
 
 $url = "http://localhost/OTCS/cs.exe?func=admin.autoconfig"
+$result = Invoke-WebRequest $url
 
-Write-Host $url
+Write-Host $result
 
 Write-Host "End: auto creation Content Server"
