@@ -55,4 +55,9 @@ $result = Invoke-WebRequest $url -OutFile "C:\OPENTEXT\logs\deployment.log" -Tim
 
 Write-Host $result
 
+$strFileName="C:\10.5.0_cs64_win_sp1_update201512.exe"
+If (Test-Path $strFileName){
+Remove-Item $strFileName
+}
+
 Write-Host "End: auto creation Content Server"
