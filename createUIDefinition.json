@@ -32,10 +32,7 @@
           "toolTip": {
             "password": "Admin password for the virtual machines."
           },
-          "osPlatform": "Windows",
-          "options": {
-            "hideConfirmation": true
-          }
+          "osPlatform": "Windows"
         }
       ],
         "steps": [
