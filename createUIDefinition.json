@@ -31,7 +31,11 @@
           },
           "toolTip": {
             "password": "Admin password for the virtual machines."
-          }
+          },
+          "options": {
+            "hideConfirmation": false
+          },
+          "osPlatform": "Windows"
         }
       ],
         "steps": [
