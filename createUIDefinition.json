@@ -15,6 +15,31 @@
         },
         "osPlatform": "Windows"
       },
+      {
+        "name": "vmSize",
+        "type": "Microsoft.Compute.SizeSelector",
+        "label": "Virtual machine size",
+        "toolTip": "The size of your virtual machine.",
+        "defaultValue": "Standard_A3",
+        "constraints": {
+          "allowedSizes": [
+            "Standard_A3",
+            "Standard_A4",
+            "Standard_A5",
+            "Standard_A6",
+            "Standard_A7",
+            "Standard_A8",
+            "Standard_A9",
+            "Standard_A10",
+            "Standard_A11",
+            "Standard_D3",
+            "Standard_D4",
+            "Standard_D12",
+            "Standard_D13",
+            "Standard_D14"
+          ]
+        }
+      },
             {
                 "name": "adminUsername",
                 "type": "Microsoft.Compute.UserNameTextBox",
@@ -133,6 +158,7 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('basics').vmName]",
+            "vmSize": "[steps('basics').vmSize]",
             "adminUsername": "[steps('basics').adminUsername]",
             "adminPassword": "[steps('basics').adminPassword]",
             "storageAccountNewOrExisting" : "[steps('infrastructureConfig').storageAccount.newOrExisting]",
