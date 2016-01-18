@@ -3,23 +3,76 @@
     "version": "0.0.1-preview",
     "parameters": {
         "basics": [
-         {   
-        "name": "vmName",
-        "type": "Microsoft.Compute.UserNameTextBox",
-        "label": "Virtual machine name",
-        "toolTip": "The Name for your Virtual Machine.",
-        "constraints": {
-          "required": true,
-          "regex": "^[a-z0-9A-Z]{1,10}$",
-          "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
-        },
-        "osPlatform": "Windows"
-      },
-	                      {
+            {
+                "name": "adminUsername",
+                "type": "Microsoft.Compute.UserNameTextBox",
+                "label": "Username",
+                "toolTip": "Admin username for the virtual machines.",
+                "osPlatform": "Windows"
+            },
+            {
+                "name": "adminPassword",
+                "type": "Microsoft.Compute.CredentialsCombo",
+                "label": {
+                    "password": "Password",
+                    "confirmPassword": "Confirm password"
+                },
+                "toolTip": {
+                    "password": "Admin password for the virtual machines."
+                },
+                "osPlatform": "Windows"
+            }
+        ],
+        "steps": [
+            {
+                "name": "infrastructureConfig",
+                "label": "Infrastructure settings",
+                "subLabel": {
+                    "preValidation": "Configure the infrastructure settings",
+                    "postValidation": "Done"
+                },
+                "bladeTitle": "Infrastructure settings",
+                "elements": [
+					{
+					  "name": "VmCount",
+					  "type": "Microsoft.Common.DropDown",
+					  "label": "Number of VMs",
+					  "defaultValue": "2",
+					  "toolTip": "",
+					  "constraints": {
+						"allowedValues": [
+						  {
+							"label": "2",
+							"value": 2
+						  },
+						  {
+							"label": "4",
+							"value": 4
+						  },
+						  {
+							"label": "8",
+							"value": 8
+						  },
+						  {
+							"label": "16",
+							"value": 16
+						  }
+						]
+					  }
+					},
+                    {
+                        "name": "storageAccount",
+                        "type": "Microsoft.Storage.StorageAccountSelector",
+                        "label": "Storage account",
+                        "defaultValue": {
+                            "type": "Standard_LRS"
+                        }
+                    },
+                    {
                         "name": "vmSize",
                         "type": "Microsoft.Compute.SizeSelector",
                         "label": "Virtual machine size",
-                        "toolTip": "The size of your virtual machine.",
+                        "toolTip": "The size of the virtual machine for the domain controller.",
                         "recommendedSizes": [
                             "Standard_D1",
                             "Standard_D2",
@@ -43,62 +96,7 @@
                             "offer": "WindowsServer",
                             "sku": "2012-R2-Datacenter"
                         },
-                        "count": 1
-                    },
-            {
-                "name": "adminUsername",
-                "type": "Microsoft.Compute.UserNameTextBox",
-                "label": "Username",
-                "toolTip": "Admin username for the virtual machines.",
-                "osPlatform": "Windows"
-            },
-            {
-                "name": "adminPassword",
-                "type": "Microsoft.Compute.CredentialsCombo",
-                "label": {
-                    "password": "Password",
-                    "confirmPassword": "Confirm password"
-                },
-                "toolTip": {
-                    "password": "Admin password for the virtual machines."
-                },
-                "osPlatform": "Windows"
-            },
-			{
-        "name": "CSadminPassword",
-        "type": "Microsoft.Compute.CredentialsCombo",
-        "label": {
-          "password": "Password",
-          "confirmPassword": "Confirm password"
-        },
-        "toolTip": {
-          "password": "Content Server Admin password."
-        },
-        "constraints": {
-          "required": true,
-          "regex": "^[a-z0-9A-Z]{1,10}$",
-          "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
-        },
-        "osPlatform": "Windows"
-      }
-        ],
-        "steps": [
-            {
-                "name": "infrastructureConfig",
-                "label": "Infrastructure settings",
-                "subLabel": {
-                    "preValidation": "Configure the infrastructure settings",
-                    "postValidation": "Done"
-                },
-                "bladeTitle": "Infrastructure settings",
-                "elements": [
-                    {
-                        "name": "storageAccount",
-                        "type": "Microsoft.Storage.StorageAccountSelector",
-                        "label": "Storage account",
-                        "defaultValue": {
-                            "type": "Standard_LRS"
-                        }
+                        "count": "[steps('infrastructureConfig').vmCount]"
                     },
                     {
                       "name": "dnsAndPublicIP",
@@ -122,16 +120,15 @@
         ],
         "outputs": {
             "location": "[location()]",
-            "vmName": "[steps('basics').vmName]",
-			"vmSize": "[steps('basics').vmSize]",
             "adminUsername": "[steps('basics').adminUsername]",
             "adminPassword": "[steps('basics').adminPassword]",
-			"CSadminPassword": "[steps('basics').CSadminPassword]",
             "storageAccountNewOrExisting" : "[steps('infrastructureConfig').storageAccount.newOrExisting]",
             "StorageAccountName": "[steps('infrastructureConfig').storageAccount.name]",
             "storageAccountType": "[steps('infrastructureConfig').storageAccount.type]",
 			"existingStorageAccountRG": "[steps('infrastructureConfig').storageAccount.resourceGroup]",
             "domainName": "[steps('infrastructureConfig').domainName]",
+            "vmSize": "[steps('infrastructureConfig').vmSize]",
+            "vmCount": "[steps('infrastructureConfig').vmCount]",
             "publicIPAddressName": "[steps('infrastructureConfig').DnsAndPublicIP.name]",
             "dnsNameForPublicIP": "[steps('infrastructureConfig').dnsAndPublicIP.domainNameLabel]",
 			"existingIPRGName": "[steps('infrastructureConfig').dnsAndPublicIP.resourceGroup]",
