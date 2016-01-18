@@ -34,23 +34,18 @@
                 },
                 "osPlatform": "Windows"
             },
-                  {
-        "name": "CSadminPassword",
-        "type": "Microsoft.Compute.CredentialsCombo",
-        "label": {
-          "password": "Password",
-          "confirmPassword": "Confirm password"
-        },
-        "toolTip": {
-          "password": "Content Server Admin password."
-        },
-        "constraints": {
-          "required": true,
-          "regex": "^[a-z0-9A-Z]{1,10}$",
-          "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
-        },
-        "osPlatform": "Windows"
-      }
+            {
+                "name": "CSadminPassword",
+                "type": "Microsoft.Compute.CredentialsCombo",
+                "label": {
+                    "password": "Password",
+                    "confirmPassword": "Confirm password"
+                },
+                "toolTip": {
+                    "password": "Admin password for the virtual machines."
+                },
+                "osPlatform": "Windows"
+            },
         ],
         "steps": [
             {
