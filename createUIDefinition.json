@@ -34,7 +34,7 @@
           },
           "osPlatform": "Windows",
           "options": {
-            "hideConfirmation": false
+            "hideConfirmation": true
           }
         }
       ],
