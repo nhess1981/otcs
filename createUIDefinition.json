@@ -77,9 +77,9 @@
               "label": "Virtual machine size",
               "toolTip": "The size of the virtual machine.",
               "recommendedSizes": [
-                "Standard_A2",
-                "Standard_D2",
-                "Standard_D3"
+                "Standard_A3",
+                "Standard_D3",
+                "Standard_D12"
               ],
               "constraints": {
                 "allowedSizes": [
@@ -119,11 +119,35 @@
           },
           "bladeTitle": "Azure SQL settings",
           "elements": [
+
+            {
+              "name": "varsqldatabaseName",
+              "type": "Microsoft.Common.TextBox",
+              "label": "Database Name",
+              "toolTip": "The Content Server Database Name",
+              "defaultValue": "OTCS",
+              "constraints": {
+                "required": true,
+                "regex": "^[a-z0-9A-Z]{1,10}$",
+                "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+              }
+            },
+            {
+              "name": "vardbserverName",
+              "type": "Microsoft.Compute.UserNameTextBox",
+              "label": "Azure SQL Server Name",
+              "toolTip": "The Name of Azure SQL Server",
+              "constraints": {
+                "required": true,
+                "regex": "^[a-z0-9A-Z]{1,10}$",
+                "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+              }
+            },
             {
               "name": "vardbserverAdminLogin",
               "type": "Microsoft.Common.TextBox",
               "label": "Azure SQL login",
-              "toolTip": "The User Name for database Azure SQL Virtual machine.",
+              "toolTip": "The Admin Username of Azure SQL database",
               "constraints": {
                 "required": true,
                 "regex": "^[a-z0-9]{1,10}$",
@@ -134,11 +158,11 @@
               "name": "vardbserverAdminLoginPassword",
               "type": "Microsoft.Common.PasswordBox",
               "label": {
-                "password": "Password",
+                "password": "Azure SQL Admin Password",
                 "confirmPassword": "Confirm password"
               },
               "toolTip": {
-                "password": "Azure SQL Admin password."
+                "password": "The Password of Azure SQL Admin User."
               },
               "constraints": {
                 "required": true,
@@ -150,7 +174,7 @@
               }
             }
 
-              ]
+          ]
             }
       ],
 
@@ -161,7 +185,8 @@
         "adminPassword": "[steps('basics').adminPassword]",
         "CSadminPassword": "[steps('basics').CSadminPassword]",
         "vmSize": "[steps('Size').vmSize]",
-        "vardbserverAdminLogin": "[steps('AzureSQLConfig').vardbserverAdminLogin]"
+        "vardbserverAdminLogin": "[steps('AzureSQLConfig').vardbserverAdminLogin]",
+        "vardbserverAdminLoginPassword": "[steps('AzureSQLConfig').vardbserverAdminLoginPassword]"
       }
     }
 }
