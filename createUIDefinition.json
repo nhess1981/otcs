@@ -137,6 +137,7 @@
               "type": "Microsoft.Common.TextBox",
               "label": "Azure SQL Server Name",
               "toolTip": "The Name of Azure SQL Server",
+              "defaultValue": "AzureSQL",
               "constraints": {
                 "required": true,
                 "regex": "^[a-z0-9A-Z]{1,10}$",
@@ -148,6 +149,7 @@
               "type": "Microsoft.Common.TextBox",
               "label": "Azure SQL login",
               "toolTip": "The Admin Username of Azure SQL database",
+              "defaultValue": "otadmin",
               "constraints": {
                 "required": true,
                 "regex": "^[a-z0-9]{1,10}$",
@@ -172,6 +174,30 @@
               "options": {
                 "hideConfirmation": true
               }
+            },
+
+            {
+              "name": "varsqldatabaseEdition",
+              "type": "Microsoft.Common.DropDown",
+              "label": "Azure SQL Edition",
+              "defaultValue": "Standard",
+              "toolTip": "",
+              "constraints": {
+                "allowedValues": [
+                  {
+                    "label": "Standard Edition",
+                    "value": "Standard"
+                  },
+                  {
+                    "label": "Premium Edition",
+                    "value": "Premium"
+                  },
+                  {
+                    "label": "Business Edition",
+                    "value": "Business"
+                  }
+                ]
+              }
             }
 
           ]
@@ -188,7 +214,8 @@
         "vardbserverAdminLogin": "[steps('AzureSQLConfig').vardbserverAdminLogin]",
         "vardbserverAdminLoginPassword": "[steps('AzureSQLConfig').vardbserverAdminLoginPassword]",
         "varsqldatabaseName": "[steps('AzureSQLConfig').varsqldatabaseName]",
-        "vardbserverName": "[steps('AzureSQLConfig').vardbserverName]"
+        "vardbserverName": "[steps('AzureSQLConfig').vardbserverName]",
+        "varsqldatabaseEdition": "[steps('AzureSQLConfig').varsqldatabaseEdition]"
       }
     }
 }
