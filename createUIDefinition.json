@@ -34,8 +34,9 @@
           },
           "options": {
             "hideConfirmation": false
-          },
-
+          }
+        }
+      ],
           "steps": [
             {
               "name": "infrastructureConfig",
