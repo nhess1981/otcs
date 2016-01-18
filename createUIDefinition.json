@@ -65,23 +65,6 @@
         "osPlatform": "Windows"
       },
       {
-        "name": "CSadminPassword",
-        "type": "Microsoft.Compute.CredentialsCombo",
-        "label": {
-          "password": "Password",
-          "confirmPassword": "Confirm password"
-        },
-        "toolTip": {
-          "password": "Content Server Admin password."
-        },
-        "constraints": {
-          "required": true,
-          "regex": "^[a-z0-9A-Z]{1,10}$",
-          "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
-        },
-        "osPlatform": "Windows"
-      },
-      {
         "name": "dnsNameForPublicIP",
         "type": "Microsoft.Network.PublicIpAddressCombo",
         "label": {
@@ -99,100 +82,12 @@
         }
       }
     ],
-    "steps": [
-      {
-        "name": "AzureSQLConfig",
-        "label": "Azure SQL settings",
-        "subLabel": {
-          "preValidation": "Azure SQL settings",
-          "postValidation": "Done"
-        },
-        "bladeTitle": "Azure SQL settings",
-        "elements": [
-          {
-            "name": "vardbserverAdminLogin",
-            "type": "Microsoft.Compute.UserNameTextBox",
-            "label": "Azure SQL Virtual machine name",
-            "toolTip": "The Name for database Azure SQL Virtual machine.",
-            "constraints": {
-              "required": true,
-              "regex": "^[a-z0-9A-Z]{1,10}$",
-              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
-            },
-            "osPlatform": "Windows"
-          },
-          {
-            "name": "vardbserverAdminLoginPassword",
-            "type": "Microsoft.Compute.CredentialsCombo",
-            "label": {
-              "password": "Password",
-              "confirmPassword": "Confirm password"
-            },
-            "toolTip": {
-              "password": "Azure SQL Admin password."
-            },
-            "constraints": {
-              "required": true,
-              "regex": "^[a-z0-9A-Z]{1,10}$",
-              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
-            },
-            "osPlatform": "Windows"
-          },
-          {
-            "name": "varsqldatabaseName",
-            "type": "Microsoft.Compute.UserNameTextBox",
-            "label": "Azure SQL Database Instance",
-            "toolTip": "The Name for database Azure SQL Instance.",
-            "constraints": {
-              "required": true,
-              "regex": "^[a-z0-9A-Z]{1,10}$",
-              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
-            },
-            "osPlatform": "Windows"
-          },
-          {
-            "name": "vardbserverName",
-            "type": "Microsoft.Compute.UserNameTextBox",
-            "label": "Azure SQL Database Instance",
-            "toolTip": "The Name for database Azure SQL Instance.",
-            "constraints": {
-              "required": true,
-              "regex": "^[a-z0-9A-Z]{1,10}$",
-              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
-            },
-            "osPlatform": "Windows"
-          },
-          {
-            "name": "varsqldatabaseEdition",
-            "type": "Microsoft.Compute.SizeSelector",
-            "label": "Azure SQL Edition",
-            "toolTip": "The Database Azure SQL Edition.",
-            "defaultValue": "Standard",
-            "constraints": {
-              "allowedSizes": [
-                "Business",
-                "Premium",
-                "Standard"
-              ]
-            },
-            "osPlatform": "Windows"
-          }
-        ]
-      }
-    ],
     "outputs": {
       "location": "[location()]",
       "vmName": "[steps('basics').vmName]",
       "vmSize": "[steps('basics').vmSize]",
       "adminUsername": "[steps('basics').adminUsername]",
-      "adminPassword": "[steps('basics').adminPassword]",
-      "CSadminPassword": "[steps('basics').CSadminPassword]",
-      "dnsNameForPublicIP": "[steps('basics').dnsNameForPublicIP]",
-      "vardbserverAdminLogin": "[steps('AzureSQLConfig').vardbserverAdminLogin]",
-      "vardbserverAdminLoginPassword": "[steps('AzureSQLConfig').vardbserverAdminLoginPassword]",
-      "varsqldatabaseName": "[steps('AzureSQLConfig').varsqldatabaseName]",
-      "vardbserverName": "[steps('AzureSQLConfig').vardbserverName]",
-      "varsqldatabaseEdition": "[steps('AzureSQLConfig').varsqldatabaseEdition]"
+      "adminPassword": "[steps('basics').adminPassword]"
     }
   }
 }
