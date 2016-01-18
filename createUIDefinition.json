@@ -19,6 +19,7 @@
           "name": "adminUsername",
           "type": "Microsoft.Compute.UserNameTextBox",
           "label": "VM Admin Username",
+          "defaultValue": "otadmin",
           "toolTip": "Admin username for the virtual machines.",
           "constraints": { "required": true },
           "osPlatform": "Windows"
@@ -51,8 +52,8 @@
           },
           "constraints": {
             "required": true,
-            "regex": "^[a-z0-9A-Z]{1,10}$",
-            "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+            "regex": "",
+            "validationMessage": ""
           },
           "options": {
             "hideConfirmation": false
