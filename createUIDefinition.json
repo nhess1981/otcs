@@ -111,26 +111,36 @@
         },
         {
           "name": "AzureSQLConfig",
-          "label": "Azure SQL settings",
+          "label": "Azure SQL",
           "subLabel": {
-            "preValidation": "Azure SQL settings",
+            "preValidation": "Configure Azure SQL settings",
             "postValidation": "Done"
           },
           "bladeTitle": "Azure SQL settings",
           "elements": [
-
-
+            {
+              "name": "vardbserverAdminLogin",
+              "type": "Microsoft.Common.TextBox",
+              "label": "Azure SQL Virtual machine name",
+              "toolTip": "The Name for database Azure SQL Virtual machine.",
+              "constraints": {
+                "required": true,
+                "regex": "^[a-z0-9]{1,10}$",
+                "validationMessage": "Only low letters and numbers are allowed, and the value must be 1-10 characters long."
+              }
+            }
           ]
         }
       ],
-        
+
       "outputs": {
         "location": "[location()]",
         "vmName": "[steps('basics').vmName]",
         "adminUsername": "[steps('basics').adminUsername]",
         "adminPassword": "[steps('basics').adminPassword]",
         "CSadminPassword": "[steps('basics').CSadminPassword]",
-        "vmSize": "[steps('Size').vmSize]"
+        "vmSize": "[steps('Size').vmSize]",
+        "vardbserverAdminLogin": "[steps('AzureSQLConfig').vardbserverAdminLogin]"
       }
     }
 }
