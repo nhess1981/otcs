@@ -1,122 +1,204 @@
 {
     "handler": "Microsoft.Compute.MultiVm",
     "version": "0.0.1-preview",
-    "parameters": {
-      "basics": [
-        {
-          "name": "vmName",
-          "type": "Microsoft.Common.TextBox",
-          "label": "Virtual machine name",
-          "defaultValue": "cs105",
-          "toolTip": "The Name for your Virtual Machine.",
-          "constraints": {
-            "required": true,
-            "regex": "^[a-z0-9A-Z]{1,10}$",
-            "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
-          }
-        },
-        {
-          "name": "adminUsername",
-          "type": "Microsoft.Compute.UserNameTextBox",
-          "label": "VM Admin Username",
-          "defaultValue": "otadmin",
-          "toolTip": "Admin username for the virtual machines.",
-          "constraints": { "required": true },
-          "osPlatform": "Windows"
-        },
-        {
-          "name": "adminPassword",
-          "type": "Microsoft.Compute.CredentialsCombo",
-          "label": {
-            "password": "Admin password",
-            "confirmPassword": "Confirm Admin password"
-          },
-          "toolTip": {
-            "password": "Password of Admin username for the virtual machines."
-          },
-          "constraints": { "required": true },
-          "options": {
-            "hideConfirmation": false
-          },
-          "osPlatform": "Windows"
-        },
-        {
-          "name": "CSadminPassword",
-          "type": "Microsoft.Compute.CredentialsCombo",
-          "label": {
-            "password": "Password of CS Administrator (Admin)",
-            "confirmPassword": "Confirm CS Admin password"
-          },
-          "toolTip": {
-            "password": "With this password you can login CS and CS admin page."
-          },
-          "constraints": {
-            "required": true,
-            "regex": "",
-            "validationMessage": ""
-          },
-          "options": {
-            "hideConfirmation": false
-          },
-          "osPlatform": "Windows"
+  "parameters": {
+    "basics": [
+      {
+        "name": "vmName",
+        "type": "Microsoft.Common.TextBox",
+        "label": "Virtual machine name",
+        "defaultValue": "cs105",
+        "toolTip": "The Name for your Virtual Machine.",
+        "constraints": {
+          "required": true,
+          "regex": "^[a-z0-9A-Z]{1,10}$",
+          "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
         }
-      ],
-        "steps": [
-            {
-                "name": "Size",
-                "label": "VM Size",
-                "subLabel": {
-                    "preValidation": "Choose virtual machine size",
-                    "postValidation": "Done"
-                },
-                "bladeTitle": "Infrastructure settings",
-                "elements": [
-  
-                    {
-                        "name": "vmSize",
-                        "type": "Microsoft.Compute.SizeSelector",
-                        "label": "Virtual machine size",
-                        "toolTip": "The size of the virtual machine.",
-                      "recommendedSizes": [
-                        "Standard_A6",
-                        "Standard_D2",
-                        "Standard_D3"
-                      ],
-                        "constraints": {
-                          "allowedSizes": [
-                            "Standard_A3",
-                            "Standard_A4",
-                            "Standard_A5",
-                            "Standard_A6",
-                            "Standard_A7",
-                            "Standard_A8",
-                            "Standard_A9",
-                            "Standard_A10",
-                            "Standard_A11",
-                            "Standard_D3",
-                            "Standard_D4",
-                            "Standard_D12",
-                            "Standard_D13",
-                            "Standard_D14"
-                          ]
-                        },
-                        "osPlatform": "Windows",
-                        "imageReference": {
-                            "publisher": "MicrosoftWindowsServer",
-                            "offer": "WindowsServer",
-                            "sku": "2012-R2-Datacenter"
-                        }
-                    }
-                ]
-            }
-        ],
-      "outputs": {
-        "location": "[location()]",
-        "vmName": "[steps('basics').vmName]",
-        "adminUsername": "[steps('basics').adminUsername]",
-        "adminPassword": "[steps('basics').adminPassword]",
-        "CSadminPassword": "[steps('basics').CSadminPassword]",
-        "vmSize": "[steps('Size').vmSize]"
+      },
+      {
+        "name": "adminUsername",
+        "type": "Microsoft.Compute.UserNameTextBox",
+        "label": "VM Admin Username",
+        "defaultValue": "otadmin",
+        "toolTip": "Admin username for the virtual machines.",
+        "constraints": { "required": true },
+        "osPlatform": "Windows"
+      },
+      {
+        "name": "adminPassword",
+        "type": "Microsoft.Compute.CredentialsCombo",
+        "label": {
+          "password": "Admin password",
+          "confirmPassword": "Confirm Admin password"
+        },
+        "toolTip": {
+          "password": "Password of Admin username for the virtual machines."
+        },
+        "constraints": { "required": true },
+        "options": {
+          "hideConfirmation": true
+        },
+        "osPlatform": "Windows"
+      },
+      {
+        "name": "CSadminPassword",
+        "type": "Microsoft.Common.PasswordBox",
+        "label": {
+          "password": "Password of CS Administrator (Admin)",
+          "confirmPassword": "Confirm CS Admin password"
+        },
+        "toolTip": {
+          "password": "With this password you can login CS and CS admin page."
+        },
+        "constraints": {
+          "required": true,
+          "regex": "",
+          "validationMessage": ""
+        },
+        "options": {
+          "hideConfirmation": true
+        }
       }
+    ],
+    "steps": [
+      {
+        "name": "Size",
+        "label": "VM Size",
+        "subLabel": {
+          "preValidation": "Choose virtual machine size",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "Infrastructure settings",
+        "elements": [
+
+          {
+            "name": "vmSize",
+            "type": "Microsoft.Compute.SizeSelector",
+            "label": "Virtual machine size",
+            "toolTip": "The size of the virtual machine.",
+            "recommendedSizes": [
+              "Standard_A6",
+              "Standard_D2",
+              "Standard_D3"
+            ],
+            "constraints": {
+              "allowedSizes": [
+                "Standard_A3",
+                "Standard_A4",
+                "Standard_A5",
+                "Standard_A6",
+                "Standard_A7",
+                "Standard_A8",
+                "Standard_A9",
+                "Standard_A10",
+                "Standard_A11",
+                "Standard_D2",
+                "Standard_D3",
+                "Standard_D4",
+                "Standard_D12",
+                "Standard_D13",
+                "Standard_D14"
+              ]
+            },
+            "osPlatform": "Windows",
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2012-R2-Datacenter"
+            }
+          }
+        ]
+      },
+      {
+        "name": "AzureSQLConfig",
+        "label": "Azure SQL settings",
+        "subLabel": {
+          "preValidation": "Azure SQL settings",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "Azure SQL settings",
+        "elements": [
+          {
+            "name": "vardbserverAdminLogin",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Azure SQL Virtual machine name",
+            "toolTip": "The Name for database Azure SQL Virtual machine.",
+            "constraints": {
+              "required": true,
+              "regex": "^[a-z0-9A-Z]{1,10}$",
+              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+            }
+          },
+          {
+            "name": "vardbserverAdminLoginPassword",
+            "type": "Microsoft.Compute.CredentialsCombo",
+            "label": {
+              "password": "Password",
+              "confirmPassword": "Confirm password"
+            },
+            "toolTip": {
+              "password": "Azure SQL Admin password."
+            },
+            "constraints": {
+              "required": true,
+              "regex": "^[a-z0-9A-Z]{1,10}$",
+              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+            },
+            "osPlatform": "Windows"
+          },
+          {
+            "name": "varsqldatabaseName",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Azure SQL Database Instance",
+            "toolTip": "The Name for database Azure SQL Instance.",
+            "constraints": {
+              "required": true,
+              "regex": "^(?i)(?!\\s)[a-z\\d ]{1,10}$",
+              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+            }
+          },
+          {
+            "name": "vardbserverName",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Azure SQL Database Instance",
+            "toolTip": "The Name for database Azure SQL Instance.",
+            "constraints": {
+              "required": true,
+              "regex": "^(?i)(?!\\s)[a-z\\d ]{1,10}$",
+              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+            }
+          },
+          {
+            "name": "varsqldatabaseEdition",
+            "type": "Microsoft.Compute.SizeSelector",
+            "label": "Azure SQL Edition",
+            "toolTip": "The Database Azure SQL Edition.",
+            "defaultValue": "Standard",
+            "constraints": {
+              "allowedSizes": [
+                "Business",
+                "Premium",
+                "Standard"
+              ]
+            },
+            "osPlatform": "Windows"
+          }
+        ]
+      }
+    ],
+
+    "outputs": {
+      "location": "[location()]",
+      "vmName": "[steps('basics').vmName]",
+      "adminUsername": "[steps('basics').adminUsername]",
+      "adminPassword": "[steps('basics').adminPassword]",
+      "CSadminPassword": "[steps('basics').CSadminPassword]",
+      "vmSize": "[steps('Size').vmSize]",
+      "vardbserverAdminLogin": "[steps('AzureSQLConfig').vardbserverAdminLogin]",
+      "vardbserverAdminLoginPassword": "[steps('AzureSQLConfig').vardbserverAdminLoginPassword]",
+      "varsqldatabaseName": "[steps('AzureSQLConfig').varsqldatabaseName]",
+      "vardbserverName": "[steps('AzureSQLConfig').vardbserverName]",
+      "varsqldatabaseEdition": "[steps('AzureSQLConfig').varsqldatabaseEdition]"
     }
+  }
 }
