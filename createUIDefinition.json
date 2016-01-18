@@ -5,15 +5,14 @@
       "basics": [
         {
           "name": "vmName",
-          "type": "Microsoft.Compute.UserNameTextBox",
+          "type": "Microsoft.Compute.TextBox",
           "label": "Virtual machine name",
           "toolTip": "The Name for your Virtual Machine.",
           "constraints": {
             "required": true,
             "regex": "^[a-z0-9A-Z]{1,10}$",
             "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
-          },
-          "osPlatform": "Windows"
+          }
         },
         {
           "name": "adminUsername",
