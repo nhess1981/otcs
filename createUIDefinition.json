@@ -5,8 +5,9 @@
       "basics": [
         {
           "name": "vmName",
-          "type": "Microsoft.Compute.TextBox",
+          "type": "Microsoft.Common.TextBox",
           "label": "Virtual machine name",
+          "defaultValue": "cs105",
           "toolTip": "The Name for your Virtual Machine.",
           "constraints": {
             "required": true,
@@ -17,7 +18,7 @@
         {
           "name": "adminUsername",
           "type": "Microsoft.Compute.UserNameTextBox",
-          "label": "VM Username",
+          "label": "VM Admin Username",
           "toolTip": "Admin username for the virtual machines.",
           "osPlatform": "Windows"
         },
@@ -25,14 +26,14 @@
           "name": "adminPassword",
           "type": "Microsoft.Compute.CredentialsCombo",
           "label": {
-            "password": "Password of Admin username for the virtual machines.",
+            "password": "Admin password",
             "confirmPassword": "Confirm password"
           },
           "toolTip": {
-            "password": "Admin password for the virtual machines."
+            "password": "Password of Admin username for the virtual machines."
           },
           "options": {
-            "hideConfirmation": false
+            "hideConfirmation": true
           },
           "osPlatform": "Windows"
         },
@@ -43,7 +44,9 @@
             "password": "Password of CS Administrator (Admin)",
             "confirmPassword": "Confirm password"
           },
-          "toolTip": "",
+          "toolTip": {
+            "password": "With this password you can login CS and CS admin page."
+          },
           "constraints": {
             "required": true,
             "regex": "",
