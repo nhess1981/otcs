@@ -134,7 +134,7 @@
             },
             {
               "name": "vardbserverName",
-              "type": "Microsoft.Compute.UserNameTextBox",
+              "type": "Microsoft.Common.TextBox",
               "label": "Azure SQL Server Name",
               "toolTip": "The Name of Azure SQL Server",
               "constraints": {
@@ -186,7 +186,9 @@
         "CSadminPassword": "[steps('basics').CSadminPassword]",
         "vmSize": "[steps('Size').vmSize]",
         "vardbserverAdminLogin": "[steps('AzureSQLConfig').vardbserverAdminLogin]",
-        "vardbserverAdminLoginPassword": "[steps('AzureSQLConfig').vardbserverAdminLoginPassword]"
+        "vardbserverAdminLoginPassword": "[steps('AzureSQLConfig').vardbserverAdminLoginPassword]",
+        "varsqldatabaseName": "[steps('AzureSQLConfig').varsqldatabaseName]",
+        "vardbserverName": "[steps('AzureSQLConfig').vardbserverName]"
       }
     }
 }
