@@ -33,7 +33,7 @@
             "password": "Admin password for the virtual machines."
           },
           "options": {
-            "hideConfirmation": false
+            "hideConfirmation": true
           },
           "osPlatform": "Windows"
         }
