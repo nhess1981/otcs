@@ -42,7 +42,7 @@
         },
         {
           "name": "CSadminPassword",
-          "type": "Microsoft.Common.PasswordBox",
+          "type": "Microsoft.Compute.CredentialsCombo",
           "label": {
             "password": "Password of CS Administrator (Admin)",
             "confirmPassword": "Confirm CS Admin password"
@@ -57,7 +57,8 @@
           },
           "options": {
             "hideConfirmation": false
-          }
+          },
+          "osPlatform": "Windows"
         }
       ],
         "steps": [
