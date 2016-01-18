@@ -32,80 +32,87 @@
           "toolTip": {
             "password": "Admin password for the virtual machines."
           },
-          "osPlatform": "Windows"
-        }
-      ],
-        "steps": [
+          "options": {
+            "hideConfirmation": false
+          },
+
+          "steps": [
             {
-                "name": "infrastructureConfig",
-                "label": "Infrastructure settings",
-                "subLabel": {
-                    "preValidation": "Configure the infrastructure settings",
-                    "postValidation": "Done"
+              "name": "infrastructureConfig",
+              "label": "Infrastructure settings",
+              "subLabel": {
+                "preValidation": "Configure the infrastructure settings",
+                "postValidation": "Done"
+              },
+              "bladeTitle": "Infrastructure settings",
+              "elements": [
+
+                {
+                  "name": "vmSize",
+                  "type": "Microsoft.Compute.SizeSelector",
+                  "label": "Virtual machine size",
+                  "toolTip": "The size of the virtual machine.",
+                  "recommendedSizes": [
+                    "Standard_A6",
+                    "Standard_D2",
+                    "Standard_D3"
+                  ],
+                  "constraints": {
+                    "allowedSizes": [
+                      "Standard_A3",
+                      "Standard_A4",
+                      "Standard_A5",
+                      "Standard_A6",
+                      "Standard_A7",
+                      "Standard_A8",
+                      "Standard_A9",
+                      "Standard_A10",
+                      "Standard_A11",
+                      "Standard_D3",
+                      "Standard_D4",
+                      "Standard_D12",
+                      "Standard_D13",
+                      "Standard_D14"
+                    ]
+                  },
+                  "osPlatform": "Windows",
+                  "imageReference": {
+                    "publisher": "MicrosoftWindowsServer",
+                    "offer": "WindowsServer",
+                    "sku": "2012-R2-Datacenter"
+                  }
                 },
-                "bladeTitle": "Infrastructure settings",
-                "elements": [
-  
-                    {
-                        "name": "vmSize",
-                        "type": "Microsoft.Compute.SizeSelector",
-                        "label": "Virtual machine size",
-                        "toolTip": "The size of the virtual machine for the domain controller.",
-                        "recommendedSizes": [
-                            "Standard_D1",
-                            "Standard_D2",
-                            "Standard_D3"
-                        ],
-                        "constraints": {
-                            "allowedSizes": [
-                              "Standard_D1",
-                              "Standard_D2",
-                              "Standard_D3",
-                              "Standard_D4",
-                              "Standard_D11",
-                              "Standard_D12",
-                              "Standard_D13",
-                              "Standard_D14"
-                            ]
-                        },
-                        "osPlatform": "Windows",
-                        "imageReference": {
-                            "publisher": "MicrosoftWindowsServer",
-                            "offer": "WindowsServer",
-                            "sku": "2012-R2-Datacenter"
-                        }
-                    },
-                    {
-                      "name": "dnsAndPublicIP",
-                      "type": "Microsoft.Network.PublicIpAddressCombo",
-                      "label": {
-                        "publicIpAddress": "Public IP address",
-                        "domainNameLabel": "DNS Prefix"
-                      },
-                      "toolTip": {
-                        "domainNameLabel": "DNS Prefix for the VM public IP addresses."
-                      },
-                      "defaultValue": {
-                        "publicIpAddressName": "publicIP"
-                      },
-                      "options": {
-                        "hideNone": true
-                      }
-                    }
-                ]
+                {
+                  "name": "dnsAndPublicIP",
+                  "type": "Microsoft.Network.PublicIpAddressCombo",
+                  "label": {
+                    "publicIpAddress": "Public IP address",
+                    "domainNameLabel": "DNS Prefix"
+                  },
+                  "toolTip": {
+                    "domainNameLabel": "DNS Prefix for the VM public IP addresses."
+                  },
+                  "defaultValue": {
+                    "publicIpAddressName": "publicIP"
+                  },
+                  "options": {
+                    "hideNone": true
+                  }
+                }
+              ]
             }
-        ],
-      "outputs": {
-        "location": "[location()]",
-        "vmName": "[steps('basics').vmName]",
-        "adminUsername": "[steps('basics').adminUsername]",
-        "adminPassword": "[steps('basics').adminPassword]",
-        "domainName": "[steps('infrastructureConfig').domainName]",
-        "vmSize": "[steps('infrastructureConfig').vmSize]",
-        "publicIPAddressName": "[steps('infrastructureConfig').DnsAndPublicIP.name]",
-        "dnsNameForPublicIP": "[steps('infrastructureConfig').dnsAndPublicIP.domainNameLabel]",
-        "existingIPRGName": "[steps('infrastructureConfig').dnsAndPublicIP.resourceGroup]",
-        "publicIPNewOrExisting": "[steps('infrastructureConfig').dnsAndPublicIP.newOrExistingOrNone]"
-      }
-    }
+          ],
+          "outputs": {
+            "location": "[location()]",
+            "vmName": "[steps('basics').vmName]",
+            "adminUsername": "[steps('basics').adminUsername]",
+            "adminPassword": "[steps('basics').adminPassword]",
+            "domainName": "[steps('infrastructureConfig').domainName]",
+            "vmSize": "[steps('infrastructureConfig').vmSize]",
+            "publicIPAddressName": "[steps('infrastructureConfig').DnsAndPublicIP.name]",
+            "dnsNameForPublicIP": "[steps('infrastructureConfig').dnsAndPublicIP.domainNameLabel]",
+            "existingIPRGName": "[steps('infrastructureConfig').dnsAndPublicIP.resourceGroup]",
+            "publicIPNewOrExisting": "[steps('infrastructureConfig').dnsAndPublicIP.newOrExistingOrNone]"
+          }
+        }
 }
