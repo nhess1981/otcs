@@ -28,14 +28,14 @@
           "type": "Microsoft.Compute.CredentialsCombo",
           "label": {
             "password": "Admin password",
-            "confirmPassword": "Confirm password"
+            "confirmPassword": "Confirm Admin password"
           },
           "toolTip": {
             "password": "Password of Admin username for the virtual machines."
           },
           "constraints": { "required": true },
           "options": {
-            "hideConfirmation": true
+            "hideConfirmation": false
           },
           "osPlatform": "Windows"
         },
