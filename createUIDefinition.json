@@ -28,7 +28,7 @@
           "type": "Microsoft.Compute.CredentialsCombo",
           "label": {
             "password": "Admin password",
-            "confirmPassword": "Confirm Admin password"
+            "confirmPassword": "Confirm password"
           },
           "toolTip": {
             "password": "Password of Admin username for the virtual machines."
@@ -51,8 +51,8 @@
           },
           "constraints": {
             "required": true,
-            "regex": "",
-            "validationMessage": ""
+            "regex": "^[a-z0-9A-Z]{1,10}$",
+            "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
           },
           "options": {
             "hideConfirmation": true
