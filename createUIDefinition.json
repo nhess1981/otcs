@@ -33,7 +33,24 @@
                     "password": "Admin password for the virtual machines."
                 },
                 "osPlatform": "Windows"
-            }
+            },
+                  {
+        "name": "CSadminPassword",
+        "type": "Microsoft.Compute.CredentialsCombo",
+        "label": {
+          "password": "Password",
+          "confirmPassword": "Confirm password"
+        },
+        "toolTip": {
+          "password": "Content Server Admin password."
+        },
+        "constraints": {
+          "required": true,
+          "regex": "^[a-z0-9A-Z]{1,10}$",
+          "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+        },
+        "osPlatform": "Windows"
+      }
         ],
         "steps": [
             {
@@ -135,6 +152,7 @@
         "vmName": "[steps('basics').vmName]",
             "adminUsername": "[steps('basics').adminUsername]",
             "adminPassword": "[steps('basics').adminPassword]",
+                  "CSadminPassword": "[steps('basics').CSadminPassword]",
             "storageAccountNewOrExisting" : "[steps('infrastructureConfig').storageAccount.newOrExisting]",
             "StorageAccountName": "[steps('infrastructureConfig').storageAccount.name]",
             "storageAccountType": "[steps('infrastructureConfig').storageAccount.type]",
