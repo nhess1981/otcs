@@ -17,7 +17,7 @@
         {
           "name": "adminUsername",
           "type": "Microsoft.Compute.UserNameTextBox",
-          "label": "Username",
+          "label": "VM Username",
           "toolTip": "Admin username for the virtual machines.",
           "osPlatform": "Windows"
         },
@@ -25,7 +25,7 @@
           "name": "adminPassword",
           "type": "Microsoft.Compute.CredentialsCombo",
           "label": {
-            "password": "Password",
+            "password": "Password of Admin username for the virtual machines.",
             "confirmPassword": "Confirm password"
           },
           "toolTip": {
@@ -40,7 +40,7 @@
           "name": "CSadminPassword",
           "type": "Microsoft.Common.PasswordBox",
           "label": {
-            "password": "Password",
+            "password": "Password of CS Administrator (Admin)",
             "confirmPassword": "Confirm password"
           },
           "toolTip": "",
