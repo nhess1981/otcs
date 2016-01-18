@@ -11,8 +11,8 @@
           "toolTip": "The Name for your Virtual Machine.",
           "constraints": {
             "required": true,
-            "regex": "^[a-z0-9A-Z]{1,10}$",
-            "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+            "regex": "^[a-z0-9A-Z]{3,10}$",
+            "validationMessage": "Only letters and numbers are allowed, and the value must be 3-10 characters long."
           }
         },
         {
@@ -77,7 +77,7 @@
               "label": "Virtual machine size",
               "toolTip": "The size of the virtual machine.",
               "recommendedSizes": [
-                "Standard_A6",
+                "Standard_A2",
                 "Standard_D2",
                 "Standard_D3"
               ],
@@ -107,6 +107,19 @@
                 "sku": "2012-R2-Datacenter"
               }
             }
+          ]
+        },
+        {
+          "name": "AzureSQLConfig",
+          "label": "Azure SQL settings",
+          "subLabel": {
+            "preValidation": "Azure SQL settings",
+            "postValidation": "Done"
+          },
+          "bladeTitle": "Azure SQL settings",
+          "elements": [
+
+
           ]
         }
       ],
