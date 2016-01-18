@@ -45,41 +45,7 @@
                 },
                 "bladeTitle": "Infrastructure settings",
                 "elements": [
-					{
-					  "name": "VmCount",
-					  "type": "Microsoft.Common.DropDown",
-					  "label": "Number of VMs",
-					  "defaultValue": "2",
-					  "toolTip": "",
-					  "constraints": {
-						"allowedValues": [
-						  {
-							"label": "2",
-							"value": 2
-						  },
-						  {
-							"label": "4",
-							"value": 4
-						  },
-						  {
-							"label": "8",
-							"value": 8
-						  },
-						  {
-							"label": "16",
-							"value": 16
-						  }
-						]
-					  }
-					},
-                    {
-                        "name": "storageAccount",
-                        "type": "Microsoft.Storage.StorageAccountSelector",
-                        "label": "Storage account",
-                        "defaultValue": {
-                            "type": "Standard_LRS"
-                        }
-                    },
+  
                     {
                         "name": "vmSize",
                         "type": "Microsoft.Compute.SizeSelector",
@@ -108,7 +74,7 @@
                             "offer": "WindowsServer",
                             "sku": "2012-R2-Datacenter"
                         },
-                        "count": "[steps('infrastructureConfig').vmCount]"
+                        "count": 1
                     },
                     {
                       "name": "dnsAndPublicIP",
@@ -135,13 +101,8 @@
         "vmName": "[steps('basics').vmName]",
         "adminUsername": "[steps('basics').adminUsername]",
         "adminPassword": "[steps('basics').adminPassword]",
-        "storageAccountNewOrExisting": "[steps('infrastructureConfig').storageAccount.newOrExisting]",
-        "StorageAccountName": "[steps('infrastructureConfig').storageAccount.name]",
-        "storageAccountType": "[steps('infrastructureConfig').storageAccount.type]",
-        "existingStorageAccountRG": "[steps('infrastructureConfig').storageAccount.resourceGroup]",
         "domainName": "[steps('infrastructureConfig').domainName]",
         "vmSize": "[steps('infrastructureConfig').vmSize]",
-        "vmCount": "[steps('infrastructureConfig').vmCount]",
         "publicIPAddressName": "[steps('infrastructureConfig').DnsAndPublicIP.name]",
         "dnsNameForPublicIP": "[steps('infrastructureConfig').dnsAndPublicIP.domainNameLabel]",
         "existingIPRGName": "[steps('infrastructureConfig').dnsAndPublicIP.resourceGroup]",
