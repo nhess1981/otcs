@@ -20,6 +20,7 @@
           "type": "Microsoft.Compute.UserNameTextBox",
           "label": "VM Admin Username",
           "toolTip": "Admin username for the virtual machines.",
+          "constraints": { "required": true },
           "osPlatform": "Windows"
         },
         {
@@ -32,6 +33,7 @@
           "toolTip": {
             "password": "Password of Admin username for the virtual machines."
           },
+          "constraints": { "required": true },
           "options": {
             "hideConfirmation": true
           },
