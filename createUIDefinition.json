@@ -83,6 +83,7 @@
               ],
               "constraints": {
                 "allowedSizes": [
+                  "Standard_A2",
                   "Standard_A3",
                   "Standard_A4",
                   "Standard_A5",
@@ -121,16 +122,36 @@
             {
               "name": "vardbserverAdminLogin",
               "type": "Microsoft.Common.TextBox",
-              "label": "Azure SQL Virtual machine name",
-              "toolTip": "The Name for database Azure SQL Virtual machine.",
+              "label": "Azure SQL login",
+              "toolTip": "The User Name for database Azure SQL Virtual machine.",
               "constraints": {
                 "required": true,
                 "regex": "^[a-z0-9]{1,10}$",
                 "validationMessage": "Only low letters and numbers are allowed, and the value must be 1-10 characters long."
               }
+            },
+            {
+              "name": "vardbserverAdminLoginPassword",
+              "type": "Microsoft.Common.PasswordBox",
+              "label": {
+                "password": "Password",
+                "confirmPassword": "Confirm password"
+              },
+              "toolTip": {
+                "password": "Azure SQL Admin password."
+              },
+              "constraints": {
+                "required": true,
+                "regex": "^[a-z0-9A-Z]{1,10}$",
+                "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+              },
+              "options": {
+                "hideConfirmation": true
+              }
             }
-          ]
-        }
+
+              ]
+            }
       ],
 
       "outputs": {
