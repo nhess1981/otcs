@@ -219,11 +219,11 @@
                 "type": "Storage account type"
               },
               "defaultValue": {
-                "prefix": "cs",
+                "name": "csstorage",
                 "type": "Standard_LRS"
               },
               "constraints": {
-                "allowedTypes": "Standard_LRS"
+                "allowedTypes": [ "Standard_LRS" ]
               }
             },
             {
