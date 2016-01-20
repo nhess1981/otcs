@@ -224,8 +224,7 @@
               },
               "constraints": {
                 "allowedTypes": "Standard_LRS"
-              },
-              "count": 1
+              }
             },
             {
               "name": "dnsAndPublicIP",
