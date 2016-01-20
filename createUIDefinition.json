@@ -168,8 +168,8 @@
               },
               "constraints": {
                 "required": true,
-                "regex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&']){6,20}$",
-                "validationMessage": "Password must have 3 of the following: 1 lowercase characters, 1 uppercase characters, 1 number, 1 special symbols, length at least 6 characters and maximum of 20."
+                "regex": "^[a-z0-9A-Z!@#$%^&']{8,16}$",
+                "validationMessage": "Password must be 8-16 characters long."
               },
               "options": {
                 "hideConfirmation": true
