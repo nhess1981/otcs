@@ -233,7 +233,7 @@
                 "publicIpAddressName": "publicIP"
               },
               "options": {
-                "hideNone": true
+                "hideNone": false
               }
             }
           ]
