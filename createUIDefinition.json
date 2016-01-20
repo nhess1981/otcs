@@ -214,11 +214,18 @@
             {
               "name": "storageAccount",
               "type": "Microsoft.Storage.StorageAccountSelector",
-              "label": "Storage account",
+              "label": {
+                "prefix": "Storage account prefix",
+                "type": "Storage account type"
+              },
               "defaultValue": {
                 "prefix": "cs",
                 "type": "Standard_LRS"
-              }
+              },
+              "constraints": {
+                "allowedTypes": "Standard_LRS"
+              },
+              "count": 1
             },
             {
               "name": "dnsAndPublicIP",
