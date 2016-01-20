@@ -68,7 +68,7 @@
             "preValidation": "Choose virtual machine size",
             "postValidation": "Done"
           },
-          "bladeTitle": "Infrastructure settings",
+          "bladeTitle": "VM Size",
           "elements": [
 
             {
@@ -206,7 +206,7 @@
           "name": "Settings",
           "label": "Settings",
           "subLabel": {
-            "preValidation": "Configure optional features",
+            "preValidation": "Configure infrastructure features",
             "postValidation": "Done"
           },
           "bladeTitle": "Infrastructure settings",
