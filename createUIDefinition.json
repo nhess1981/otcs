@@ -52,8 +52,8 @@
           },
           "constraints": {
             "required": true,
-            "regex": "",
-            "validationMessage": ""
+            "regex": "^[a-z0-9A-Z!@#$%^&']{8,16}$",
+            "validationMessage": "Password must be 8-16 characters long."
           },
           "options": {
             "hideConfirmation": true
@@ -180,7 +180,7 @@
               "name": "varsqldatabaseEdition",
               "type": "Microsoft.Common.DropDown",
               "label": "Azure SQL Edition",
-              "defaultValue": "Standard",
+              "defaultValue": "Standard Edition",
               "toolTip": "",
               "constraints": {
                 "allowedValues": [
