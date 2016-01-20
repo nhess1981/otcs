@@ -128,8 +128,8 @@
               "defaultValue": "OTCS",
               "constraints": {
                 "required": true,
-                "regex": "^[a-z0-9A-Z]{1,10}$",
-                "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+                "regex": "^[a-z0-9A-Z]{3,10}$",
+                "validationMessage": "Only letters and numbers are allowed, and the value must be 3-10 characters long."
               }
             },
             {
@@ -140,8 +140,8 @@
               "defaultValue": "AzureSQL",
               "constraints": {
                 "required": true,
-                "regex": "^[a-z0-9A-Z]{1,10}$",
-                "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+                "regex": "^[a-z0-9A-Z]{3,10}$",
+                "validationMessage": "Only letters and numbers are allowed, and the value must be 3-10 characters long."
               }
             },
             {
@@ -168,8 +168,8 @@
               },
               "constraints": {
                 "required": true,
-                "regex": "^[a-z0-9A-Z]{1,10}$",
-                "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+                "regex": "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})",
+                "validationMessage": "Password must contains one lowercase characters,one uppercase characters,one special symbols, length at least 6 characters and maximum of 20."
               },
               "options": {
                 "hideConfirmation": true
