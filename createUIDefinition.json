@@ -8,7 +8,7 @@
           "type": "Microsoft.Common.TextBox",
           "label": "Virtual machine name",
           "defaultValue": "cs105",
-          "toolTip": "The Name of your Virtual Machine.",
+          "toolTip": "The Name for your Virtual Machine.",
           "constraints": {
             "required": true,
             "regex": "^[a-z0-9A-Z]{1,10}$",
@@ -20,7 +20,7 @@
           "type": "Microsoft.Compute.UserNameTextBox",
           "label": "VM Admin Username",
           "defaultValue": "otadmin",
-          "toolTip": "Admin username of the virtual machines.",
+          "toolTip": "Admin username for the virtual machines.",
           "constraints": { "required": true },
           "osPlatform": "Windows"
         },
@@ -32,7 +32,7 @@
             "confirmPassword": "Confirm Admin password"
           },
           "toolTip": {
-            "password": "Password of VM Admin user."
+            "password": "Password for VM Admin user."
           },
           "constraints": { "required": true },
           "options": {
@@ -44,7 +44,7 @@
           "name": "CSadminPassword",
           "type": "Microsoft.Common.PasswordBox",
           "label": {
-            "password": "Password of CS Administrator (Admin)",
+            "password": "Password for CS Administrator (Admin)",
             "confirmPassword": "Confirm CS Admin password"
           },
           "toolTip": {
@@ -136,7 +136,7 @@
               "name": "vardbserverName",
               "type": "Microsoft.Common.TextBox",
               "label": "Azure SQL Server Name",
-              "toolTip": "The Name of Azure SQL Server",
+              "toolTip": "The Name for Azure SQL Server",
               "defaultValue": "AzureSQL",
               "constraints": {
                 "required": true,
@@ -148,7 +148,7 @@
               "name": "vardbserverAdminLogin",
               "type": "Microsoft.Common.TextBox",
               "label": "Azure SQL login",
-              "toolTip": "The Admin Username of Azure SQL database",
+              "toolTip": "The Admin Username for Azure SQL database",
               "defaultValue": "otadmin",
               "constraints": {
                 "required": true,
@@ -164,7 +164,7 @@
                 "confirmPassword": "Confirm password"
               },
               "toolTip": {
-                "password": "The Password of Azure SQL Admin User."
+                "password": "The Password for Azure SQL Admin User."
               },
               "constraints": {
                 "required": true,
@@ -230,10 +230,10 @@
                 "domainNameLabel": "DNS Prefix for the VM public IP addresses."
               },
               "defaultValue": {
-                "publicIpAddressName": "publicIP"
+                "publicIpAddressName": "CSPublicIP"
               },
               "options": {
-                "hideNone": false
+                "hideNone": true
               }
             }
           ]
@@ -251,7 +251,16 @@
         "vardbserverAdminLoginPassword": "[steps('AzureSQLConfig').vardbserverAdminLoginPassword]",
         "varsqldatabaseName": "[steps('AzureSQLConfig').varsqldatabaseName]",
         "vardbserverName": "[steps('AzureSQLConfig').vardbserverName]",
-        "varsqldatabaseEdition": "[steps('AzureSQLConfig').varsqldatabaseEdition]"
+        "varsqldatabaseEdition": "[steps('AzureSQLConfig').varsqldatabaseEdition]",
+        "storageAccountNewOrExisting": "[steps('Settings').storageAccount.newOrExisting]",
+        "StorageAccountName": "[steps('Settings').storageAccount.name]",
+        "storageAccountType": "[steps('Settings').storageAccount.type]",
+        "existingStorageAccountRG": "[steps('Settings').storageAccount.resourceGroup]",
+        "domainName": "[steps('Settings').domainName]",
+        "publicIPAddressName": "[steps('Settings').DnsAndPublicIP.name]",
+        "dnsNameForPublicIP": "[steps('Settings').dnsAndPublicIP.domainNameLabel]",
+        "existingIPRGName": "[steps('Settings').dnsAndPublicIP.resourceGroup]",
+        "publicIPNewOrExisting": "[steps('Settings').dnsAndPublicIP.newOrExistingOrNone]"
       }
     }
 }
