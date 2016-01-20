@@ -11,8 +11,8 @@
           "toolTip": "The Name of your Virtual Machine.",
           "constraints": {
             "required": true,
-            "regex": "^[a-z0-9A-Z_-]{3,15}$",
-            "validationMessage": "Only low letters and numbers are allowed, and the value must be 3-10 characters long."
+            "regex": "^[a-z0-9A-Z]{1,10}$",
+            "validationMessage": "Only low letters and numbers are allowed, and the value must be 1-10 characters long."
           }
         },
         {
@@ -128,8 +128,8 @@
               "defaultValue": "OTCS",
               "constraints": {
                 "required": true,
-                "regex": "^[a-z0-9A-Z_-]{3,15}$",
-                "validationMessage": "Only letters and numbers are allowed, and the value must be 3-10 characters long."
+                "regex": "^[a-z0-9A-Z_-]{1,10}$",
+                "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
               }
             },
             {
@@ -140,8 +140,8 @@
               "defaultValue": "AzureSQL",
               "constraints": {
                 "required": true,
-                "regex": "^[a-z0-9A-Z_-]{3,15}$",
-                "validationMessage": "Only letters and numbers are allowed, and the value must be 3-10 characters long."
+                "regex": "^[a-z0-9A-Z_-]{1,10}$",
+                "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
               }
             },
             {
@@ -152,8 +152,8 @@
               "defaultValue": "otadmin",
               "constraints": {
                 "required": true,
-                "regex": "^[a-z0-9A-Z_-]{3,15}$",
-                "validationMessage": "Only low letters and numbers are allowed, and the value must be 3-10 characters long."
+                "regex": "^[a-z0-9A-Z_-]{1,10}$",
+                "validationMessage": "Only low letters and numbers are allowed, and the value must be 1-10 characters long."
               }
             },
             {
@@ -168,7 +168,7 @@
               },
               "constraints": {
                 "required": true,
-                "regex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&'])[^ ]{6,20}$",
+                "regex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&']){6,20}$",
                 "validationMessage": "Password must have 3 of the following: 1 lowercase characters, 1 uppercase characters, 1 number, 1 special symbols, length at least 6 characters and maximum of 20."
               },
               "options": {
