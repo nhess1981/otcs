@@ -216,6 +216,7 @@
               "type": "Microsoft.Storage.StorageAccountSelector",
               "label": "Storage account",
               "defaultValue": {
+                "prefix": "csstorage",
                 "type": "Standard_LRS"
               }
             },
