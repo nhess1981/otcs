@@ -8,7 +8,7 @@
           "type": "Microsoft.Common.TextBox",
           "label": "Virtual machine name",
           "defaultValue": "cs105",
-          "toolTip": "The Name for your Virtual Machine.",
+          "toolTip": "The Name of your Virtual Machine.",
           "constraints": {
             "required": true,
             "regex": "^[a-z0-9A-Z]{3,10}$",
@@ -20,7 +20,7 @@
           "type": "Microsoft.Compute.UserNameTextBox",
           "label": "VM Admin Username",
           "defaultValue": "otadmin",
-          "toolTip": "Admin username for the virtual machines.",
+          "toolTip": "Admin username of the virtual machines.",
           "constraints": { "required": true },
           "osPlatform": "Windows"
         },
@@ -32,7 +32,7 @@
             "confirmPassword": "Confirm Admin password"
           },
           "toolTip": {
-            "password": "Password of Admin username for the virtual machines."
+            "password": "Password of VM Admin user."
           },
           "constraints": { "required": true },
           "options": {
@@ -78,8 +78,8 @@
               "toolTip": "The size of the virtual machine.",
               "recommendedSizes": [
                 "Standard_A3",
-                "Standard_D3",
-                "Standard_D12"
+                "Standard_A4",
+                "Standard_D3"
               ],
               "constraints": {
                 "allowedSizes": [
@@ -201,7 +201,20 @@
             }
 
           ]
-            }
+        },
+        {
+          "name": "Settings",
+          "label": "Settings",
+          "subLabel": {
+            "preValidation": "Configure optional features",
+            "postValidation": "Done"
+          },
+          "bladeTitle": "Infrastructure settings",
+          "elements": [
+
+
+          ]
+        }
       ],
 
       "outputs": {
