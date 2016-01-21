@@ -272,7 +272,7 @@
                             "subnet1": {
                                 "label": "CS subnet",
                                 "defaultValue": {
-                                    "name": "cssubnet",
+                                    "name": "cs_subnet",
                                     "addressPrefixSize": "/24"
                                 },
                                 "constraints": {
