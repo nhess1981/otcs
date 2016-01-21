@@ -243,9 +243,9 @@
         },
                     {
                 "name": "networkInfo",
-                "label": "Virtual network information",
+                "label": "Virtual network",
                 "subLabel": {
-                    "preValidation": "Provide virtual network information",
+                    "preValidation": "Virtual network configuration",
                     "postValidation": "Done"
                 },
                 "bladeTitle": "Virtual network information",
