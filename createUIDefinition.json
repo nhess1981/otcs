@@ -214,12 +214,8 @@
             {
               "name": "storageAccount",
               "type": "Microsoft.Storage.StorageAccountSelector",
-              "label": {
-                "prefix": "Storage account prefix",
-                "type": "Storage account type"
-              },
+              "label": "Storage account",
               "defaultValue": {
-                "name": "csstorage",
                 "type": "Standard_LRS"
               },
               "constraints": {
