@@ -262,7 +262,7 @@
                             "subnets": ""
                         },
                         "defaultValue": {
-                            "name": "appserviceVnet",
+                            "name": "CSVnet",
                             "addressPrefixSize": "/16"
                         },
                         "constraints": {
@@ -270,9 +270,9 @@
                         },
                         "subnets": {
                             "subnet1": {
-                                "label": "MySQL subnet",
+                                "label": "CS subnet",
                                 "defaultValue": {
-                                    "name": "dbsubnet",
+                                    "name": "cssubnet",
                                     "addressPrefixSize": "/24"
                                 },
                                 "constraints": {
@@ -307,7 +307,14 @@
         "publicIPAddressName": "[steps('Settings').dnsAndPublicIP.name]",
         "dnsNameForPublicIP": "[steps('Settings').dnsAndPublicIP.domainNameLabel]",
         "existingIPRGName": "[steps('Settings').dnsAndPublicIP.resourceGroup]",
-        "publicIPNewOrExisting": "[steps('Settings').dnsAndPublicIP.newOrExistingOrNone]"
+        "publicIPNewOrExisting": "[steps('Settings').dnsAndPublicIP.newOrExistingOrNone]",
+            "virtualNetworkName": "[steps('networkInfo').vnetSpec.name]",
+            "vnetNewOrExisting": "[steps('networkInfo').vnetSpec.newOrExisting]",
+            "virtualNetworkExistingRGName": "[steps('networkInfo').vnetSpec.resourceGroup]",
+            "dbSubnetName": "[steps('networkInfo').vnetSpec.subnets.subnet1.name]",
+            "vnetAddressPrefix": "[steps('networkInfo').vnetSpec.addressPrefix]",
+            "dbSubnetAddressPrefix": "[steps('networkInfo').vnetSpec.subnets.subnet1.addressPrefix]",
+            "dbSubnetStartAddress": "[steps('networkInfo').vnetSpec.subnets.subnet1.startAddress]"
       }
     }
 }
