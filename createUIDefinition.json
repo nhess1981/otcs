@@ -245,7 +245,6 @@
 
       "outputs": {
         "location": "[location()]",
-        "vmName": "[steps('basics').vmName]",
         "adminUsername": "[steps('basics').adminUsername]",
         "adminPassword": "[steps('basics').adminPassword]",
         "CSadminPassword": "[steps('basics').CSadminPassword]",
