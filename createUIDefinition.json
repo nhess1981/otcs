@@ -248,22 +248,7 @@
         "vmName": "[basics('vmName')]",
         "adminUsername": "[basics('adminUsername')]",
         "adminPassword": "[basics('adminPassword')]",
-        "CSadminPassword": "[basics('CSadminPassword')]",
-        "vmSize": "[steps('Size').vmSize]",
-        "vardbserverAdminLogin": "[steps('AzureSQLConfig').vardbserverAdminLogin]",
-        "vardbserverAdminLoginPassword": "[steps('AzureSQLConfig').vardbserverAdminLoginPassword]",
-        "varsqldatabaseName": "[steps('AzureSQLConfig').varsqldatabaseName]",
-        "vardbserverName": "[steps('AzureSQLConfig').vardbserverName]",
-        "varsqldatabaseEdition": "[steps('AzureSQLConfig').varsqldatabaseEdition]",
-        "storageAccountNewOrExisting": "[steps('Settings').storageAccount.newOrExisting]",
-        "StorageAccountName": "[steps('Settings').storageAccount.name]",
-        "storageAccountType": "[steps('Settings').storageAccount.type]",
-        "existingStorageAccountRG": "[steps('Settings').storageAccount.resourceGroup]",
-        "domainName": "[steps('Settings').domainName]",
-        "publicIPAddressName": "[steps('Settings').DnsAndPublicIP.name]",
-        "dnsNameForPublicIP": "[steps('Settings').dnsAndPublicIP.domainNameLabel]",
-        "existingIPRGName": "[steps('Settings').dnsAndPublicIP.resourceGroup]",
-        "publicIPNewOrExisting": "[steps('Settings').dnsAndPublicIP.newOrExistingOrNone]"
+        "CSadminPassword": "[basics('CSadminPassword')]"
       }
     }
 }
