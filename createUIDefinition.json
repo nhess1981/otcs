@@ -262,7 +262,7 @@
                             "subnets": "For a new virtual network, the deployment will create one subnet"
                         },
                         "defaultValue": {
-                            "name": "vnet-haivision",
+                            "name": "CSVNET",
                             "addressPrefixSize": "/16"
                         },
                         "constraints": {
@@ -272,7 +272,7 @@
                             "subnet1": {
                                 "label": "Subnet 1",
                                 "defaultValue": {
-                                    "name": "subnet-haivision",
+                                    "name": "cs_subnet",
                                     "addressPrefixSize": "/24"
                                 },
                                 "constraints": {
@@ -286,7 +286,6 @@
                 ]
             }
       ],
-
       "outputs": {
         "location": "[location()]",
         "vmName": "[basics('vmName')]",
@@ -308,15 +307,12 @@
         "dnsNameForPublicIP": "[steps('Settings').dnsAndPublicIP.domainNameLabel]",
         "existingIPRGName": "[steps('Settings').dnsAndPublicIP.resourceGroup]",
         "publicIPNewOrExisting": "[steps('Settings').dnsAndPublicIP.newOrExistingOrNone]",
-
-            
-            "vnetNewOrExisting": "[steps('networkInfo').virtualNetwork.newOrExisting]",
-            "vnetResourceGroup": "[steps('networkInfo').virtualNetwork.resourceGroup]",
-            "vnetName": "[steps('networkInfo').virtualNetwork.name]",
-            "vnetAddressPrefix": "[steps('networkInfo').virtualNetwork.addressPrefix]",
-            "subnet1Name": "[steps('networkInfo').virtualNetwork.subnets.subnet1.name]",
-            "subnet1AddressPrefix": "[steps('networkInfo').virtualNetwork.subnets.subnet1.addressPrefix]"
-
+        "vnetNewOrExisting": "[steps('networkInfo').virtualNetwork.newOrExisting]",
+        "vnetResourceGroup": "[steps('networkInfo').virtualNetwork.resourceGroup]",
+        "vnetName": "[steps('networkInfo').virtualNetwork.name]",
+        "vnetAddressPrefix": "[steps('networkInfo').virtualNetwork.addressPrefix]",
+        "subnet1Name": "[steps('networkInfo').virtualNetwork.subnets.subnet1.name]",
+        "subnet1AddressPrefix": "[steps('networkInfo').virtualNetwork.subnets.subnet1.addressPrefix]"
       }
     }
 }
