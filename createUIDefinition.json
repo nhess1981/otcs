@@ -248,7 +248,8 @@
         "vmName": "[basics('vmName')]",
         "adminUsername": "[basics('adminUsername')]",
         "adminPassword": "[basics('adminPassword')]",
-        "CSadminPassword": "[basics('CSadminPassword')]"
+        "CSadminPassword": "[basics('CSadminPassword')]",
+        "vmSize": "[steps('Size').vmSize]"
       }
     }
 }
