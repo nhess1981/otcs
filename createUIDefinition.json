@@ -255,7 +255,7 @@
         "varsqldatabaseName": "[steps('AzureSQLConfig').varsqldatabaseName]",
         "vardbserverName": "[steps('AzureSQLConfig').vardbserverName]",
         "varsqldatabaseEdition": "[steps('AzureSQLConfig').varsqldatabaseEdition]",
-        "storageAccountNewOrExisting": "[steps('Settings').storageAccount.newOrExisting]",
+        "storageAccountNewOrExisting": "[steps('Settings').storageAccount.newOrExisting]"
 
 
       }
