@@ -259,7 +259,8 @@
 
         "storageAccountType": "[steps('Settings').storageAccount.type]",
         "existingStorageAccountRG": "[steps('Settings').storageAccount.resourceGroup]",
-        "publicIPAddressName": "[steps('Settings').DnsAndPublicIP.Name]",
+        
+        "domainName": "[steps('Settings').domainName]",
         "dnsNameForPublicIP": "[steps('Settings').dnsAndPublicIP.domainNameLabel]",
         "existingIPRGName": "[steps('Settings').dnsAndPublicIP.resourceGroup]",
         "publicIPNewOrExisting": "[steps('Settings').dnsAndPublicIP.newOrExistingOrNone]"
