@@ -250,35 +250,35 @@
                 },
                 "bladeTitle": "Virtual network information",
                 "elements": [
-                    {
-                        "name": "vnetSpec",
+                     {
+                        "name": "virtualNetwork",
                         "type": "Microsoft.Network.VirtualNetworkCombo",
                         "label": {
                             "virtualNetwork": "Virtual network",
                             "subnets": "Subnets"
                         },
                         "toolTip": {
-                            "virtualNetwork": "",
-                            "subnets": ""
+                            "virtualNetwork": "Virtual machine can be deployed into a new or existing virtual network",
+                            "subnets": "For a new virtual network, the deployment will create one subnet"
                         },
                         "defaultValue": {
-                            "name": "CSVnet",
+                            "name": "vnet-haivision",
                             "addressPrefixSize": "/16"
                         },
                         "constraints": {
-                            "minAddressPrefixSize": "/29"
+                            "minAddressPrefixSize": "/16"
                         },
                         "subnets": {
                             "subnet1": {
-                                "label": "CS subnet",
+                                "label": "Subnet 1",
                                 "defaultValue": {
-                                    "name": "cs_subnet",
+                                    "name": "subnet-haivision",
                                     "addressPrefixSize": "/24"
                                 },
                                 "constraints": {
-                                    "minAddressPrefixSize": "/29",
-                                    "minAddressCount": 2,
-                                    "requireContiguousAddresses": true
+                                    "minAddressPrefixSize": "/24",
+                                    "minAddressCount": 1,
+                                    "requireContiguousAddresses": false
                                 }
                             }
                         }
@@ -308,13 +308,15 @@
         "dnsNameForPublicIP": "[steps('Settings').dnsAndPublicIP.domainNameLabel]",
         "existingIPRGName": "[steps('Settings').dnsAndPublicIP.resourceGroup]",
         "publicIPNewOrExisting": "[steps('Settings').dnsAndPublicIP.newOrExistingOrNone]",
-            "virtualNetworkName": "[steps('networkInfo').vnetSpec.name]",
-            "vnetNewOrExisting": "[steps('networkInfo').vnetSpec.newOrExisting]",
-            "virtualNetworkExistingRGName": "[steps('networkInfo').vnetSpec.resourceGroup]",
-            "dbSubnetName": "[steps('networkInfo').vnetSpec.subnets.subnet1.name]",
-            "vnetAddressPrefix": "[steps('networkInfo').vnetSpec.addressPrefix]",
-            "dbSubnetAddressPrefix": "[steps('networkInfo').vnetSpec.subnets.subnet1.addressPrefix]",
-            "dbSubnetStartAddress": "[steps('networkInfo').vnetSpec.subnets.subnet1.startAddress]"
+
+            
+            "vnetNewOrExisting": "[steps('networkInfo').virtualNetwork.newOrExisting]",
+            "vnetResourceGroup": "[steps('networkInfo').virtualNetwork.resourceGroup]",
+            "vnetName": "[steps('networkInfo').virtualNetwork.name]",
+            "vnetAddressPrefix": "[steps('networkInfo').virtualNetwork.addressPrefix]",
+            "subnet1Name": "[steps('networkInfo').virtualNetwork.subnets.subnet1.name]",
+            "subnet1AddressPrefix": "[steps('networkInfo').virtualNetwork.subnets.subnet1.addressPrefix]"
+
       }
     }
 }
