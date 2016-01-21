@@ -255,7 +255,16 @@
         "varsqldatabaseName": "[steps('AzureSQLConfig').varsqldatabaseName]",
         "vardbserverName": "[steps('AzureSQLConfig').vardbserverName]",
         "varsqldatabaseEdition": "[steps('AzureSQLConfig').varsqldatabaseEdition]",
-        "storageAccountNewOrExisting": "[steps('Settings').storageAccount.newOrExisting]"
+        "storageAccountNewOrExisting": "[steps('Settings').storageAccount.newOrExisting]",
+
+        "storageAccountType": "[steps('Settings').storageAccount.type]",
+        "existingStorageAccountRG": "[steps('Settings').storageAccount.resourceGroup]",
+        "domainName": "[steps('Settings').domainName]",
+
+        "dnsNameForPublicIP": "[steps('Settings').dnsAndPublicIP.domainNameLabel]",
+        "existingIPRGName": "[steps('Settings').dnsAndPublicIP.resourceGroup]",
+        "publicIPNewOrExisting": "[steps('Settings').dnsAndPublicIP.newOrExistingOrNone]"
+      }
 
 
       }
