@@ -11,7 +11,7 @@
         "vnetName": {
             "type": "string",
             "metadata": {
-                "description": "Virtual Network name (e.g. vnet-haivision)"
+                "description": "Virtual Network name"
             }
         },
         "vnetResourceGroup": {
@@ -23,7 +23,7 @@
         "vnetAddressPrefix": {
             "type": "string",
             "metadata": {
-                "description": "Virtual Network Address Prefix (i.e. CIDR)"
+                "description": "Virtual Network Address Prefix"
             }
         },
         "subnetName": {
