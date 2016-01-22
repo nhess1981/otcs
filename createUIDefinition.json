@@ -140,8 +140,8 @@
             "defaultValue": "AzureSQL",
             "constraints": {
               "required": true,
-              "regex": "^[a-z0-9A-Z_-]{1,10}$",
-              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+              "regex": "^[(a-z0-9)]{3,10}$",
+              "validationMessage": "Only lower case letters and numbers are allowed, and the value must be 3-10 characters long."
             }
           },
           {
@@ -153,7 +153,7 @@
             "constraints": {
               "required": true,
               "regex": "^[a-z0-9A-Z_-]{1,10}$",
-              "validationMessage": "Only low letters and numbers are allowed, and the value must be 1-10 characters long."
+              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
             }
           },
           {
