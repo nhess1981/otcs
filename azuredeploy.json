@@ -246,6 +246,7 @@
             "osDisk": {
               "name": "osdisk",
               "vhd": {
+                "uri": "[concat('http://', parameters('StorageAccountName'), '.blob.core.windows.net/vhds/', 'osdisk.vhd')]"
                 "uri": "[concat('http://', variables('vhdStorageName'), '.blob.core.windows.net/', variables('vhdStorageContainerName'), '/', variables('OSDiskName'), '.vhd')]"
               },
               "caching": "ReadWrite",
