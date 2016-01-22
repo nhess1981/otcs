@@ -52,8 +52,8 @@
         },
         "constraints": {
           "required": true,
-          "regex": "^[(a-z0-9A-Z!@#$%^&')(?!(livelink)).]{8,16}$",
-          "validationMessage": "Password must be 8-16 characters long, can not be livelink."
+          "regex": "^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])|(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*])|(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])|(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])).{8,15}$",
+          "validationMessage": "The password must be at 8-15 characters, and 3 of one number, one lower case letter, one upper case letter, and one special character."
         },
         "options": {
           "hideConfirmation": true
@@ -269,8 +269,8 @@
               "minAddressPrefixSize": "/16"
             },
             "subnets": {
-              "subnet1": {
-                "label": "Subnet 1",
+              "subnet": {
+                "label": "Subnet",
                 "defaultValue": {
                   "name": "cs_subnet",
                   "addressPrefixSize": "/24"
@@ -311,8 +311,8 @@
       "vnetResourceGroup": "[steps('networkInfo').virtualNetwork.resourceGroup]",
       "vnetName": "[steps('networkInfo').virtualNetwork.name]",
       "vnetAddressPrefix": "[steps('networkInfo').virtualNetwork.addressPrefix]",
-      "subnet1Name": "[steps('networkInfo').virtualNetwork.subnets.subnet1.name]",
-      "subnet1AddressPrefix": "[steps('networkInfo').virtualNetwork.subnets.subnet1.addressPrefix]"
+      "subnetName": "[steps('networkInfo').virtualNetwork.subnets.subnet.name]",
+      "subnetAddressPrefix": "[steps('networkInfo').virtualNetwork.subnets.subnet.addressPrefix]"
     }
   }
 }
