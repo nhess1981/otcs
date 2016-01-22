@@ -52,8 +52,8 @@
         },
         "constraints": {
           "required": true,
-          "regex": "^[a-z0-9A-Z!@#$%^&']{8,16}$",
-          "validationMessage": "Password must be 8-16 characters long."
+          "regex": "^[(a-z0-9A-Z!@#$%^&')(?!(livelink)).]{8,16}$",
+          "validationMessage": "Password must be 8-16 characters long, can not be livelink."
         },
         "options": {
           "hideConfirmation": true
