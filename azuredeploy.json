@@ -1,348 +1,318 @@
-
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
+  "handler": "Microsoft.Compute.MultiVm",
+  "version": "0.0.1-preview",
   "parameters": {
-    "adminUsername": {
-      "type": "string",
-      "minLength": 1,
-      "metadata": {
-        "description": "Username for the Virtual Machine."
-      }
-    },
-    "adminPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Password for the Virtual Machine."
-      }
-    },
-    "CSadminPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Password for the Virtual Machine."
-      }
-    },
-    "vmName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name for the Virtual Machine."
-      }
-    },
-    "vmSize": {
-      "type": "string",
-      "defaultValue": "Standard_A3",
-      "allowedValues": [
-        "Standard_A3",
-        "Standard_A4",
-        "Standard_A5",
-        "Standard_A6",
-        "Standard_A7",
-        "Standard_A8",
-        "Standard_A9",
-        "Standard_A10",
-        "Standard_A11",
-        "Standard_D3",
-        "Standard_D4",
-        "Standard_D12",
-        "Standard_D13",
-        "Standard_D14"
-      ],
-      "metadata": {
-        "description": "This is the size of your VM"
-      }
-
-    },
-    "dnsNameForPublicIP": {
-      "type": "string",
-      "minLength": 1,
-      "metadata": {
-        "description": "Globally unique DNS Name for the Public IP used to access the Virtual Machine."
-      }
-    },
-
-    "vardbserverAdminLogin": {
-      "type": "string",
-      "minLength": 1
-    },
-    "vardbserverAdminLoginPassword": {
-      "type": "securestring"
-    },
-    "varsqldatabaseName": {
-      "type": "string",
-      "minLength": 1
-    },
-    "vardbserverName": {
-      "type": "string",
-      "minLength": 1
-    },
-
-    "varsqldatabaseEdition": {
-      "type": "string",
-      "defaultValue": "Standard",
-      "allowedValues": [
-        "Business",
-        "Premium",
-        "Standard"
-      ]
-    }
-  },
-  "variables": {
-    "nicName": "CSVMNic",
-    "addressPrefix": "10.0.0.0/16",
-    "subnetName": "Subnet",
-    "subnetPrefix": "10.0.0.0/24",
-    "vhdStorageType": "Standard_LRS",
-    "publicIPAddressName": "CSPublicIP",
-    "publicIPAddressType": "Dynamic",
-    "vhdStorageContainerName": "vhds",
-    "virtualNetworkName": "CSVNET",
-    "varsqldatabaseCollation": "SQL_Latin1_General_CP1_CI_AS",
-    "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
-    "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
-    "vhdStorageName": "[concat('csstorage', uniqueString(resourceGroup().id))]",
-    "diagnosticsStorageName": "[variables('vhdStorageName')]",
-    "diagnosticsStorageResourceGroup": "[resourcegroup().name]",
-    "accountid": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', variables('diagnosticsStorageResourceGroup'), '/providers/','Microsoft.Storage/storageAccounts/', variables('diagnosticsStorageName'))]",
-    "wadlogs": "<WadCfg> <DiagnosticMonitorConfiguration overallQuotaInMB=\"4096\" xmlns=\"http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration\"> <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter=\"Error\"/> <WindowsEventLog scheduledTransferPeriod=\"PT1M\" > <DataSource name=\"Application!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"Security!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"System!*[System[(Level = 1 or Level = 2)]]\" /></WindowsEventLog>",
-    "wadperfcounters1": "<PerformanceCounters scheduledTransferPeriod=\"PT1M\"><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% Processor Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU utilization\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% Privileged Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU privileged time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% User Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU user time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor Information(_Total)\\Processor Frequency\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"CPU frequency\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\System\\Processes\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Processes\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Process(_Total)\\Thread Count\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Threads\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Process(_Total)\\Handle Count\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Handles\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\% Committed Bytes In Use\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Memory usage\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Available Bytes\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory available\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Committed Bytes\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory committed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Commit Limit\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory commit limit\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active time\" locale=\"en-us\"/></PerformanceCounterConfiguration>",
-    "wadperfcounters2": "<PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Read Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active read time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Write Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active write time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Transfers/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Reads/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk read operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Writes/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk write operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Read Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk read speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Write Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk write speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\LogicalDisk(_Total)\\% Free Space\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk free space (percentage)\" locale=\"en-us\"/></PerformanceCounterConfiguration></PerformanceCounters>",
-    "wadcfgxstart": "[concat(variables('wadlogs'), variables('wadperfcounters1'), variables('wadperfcounters2'), '<Metrics resourceId=\"')]",
-    "wadmetricsresourceid": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', variables('diagnosticsStorageResourceGroup'), '/providers/', 'Microsoft.Compute/virtualMachines/', parameters('vmName'))]",
-    "wadcfgxend": "\"><MetricAggregation scheduledTransferPeriod=\"PT1H\"/><MetricAggregation scheduledTransferPeriod=\"PT1M\"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>"
-  },
-  "resources": [
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[variables('vhdStorageName')]",
-      "apiVersion": "2015-06-15",
-      "location": "[resourceGroup().location]",
-      "tags": {
-        "displayName": "StorageAccount"
+    "basics": [
+      {
+        "name": "vmName",
+        "type": "Microsoft.Common.TextBox",
+        "label": "Virtual machine name",
+        "defaultValue": "cs105",
+        "toolTip": "The Name for your Virtual Machine.",
+        "constraints": {
+          "required": true,
+          "regex": "^[a-z0-9A-Z]{1,10}$",
+          "validationMessage": "Only low letters and numbers are allowed, and the value must be 1-10 characters long."
+        }
       },
-      "properties": {
-        "accountType": "[variables('vhdStorageType')]"
-      }
-    },
-    {
-      "apiVersion": "2015-05-01-preview",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[variables('publicIPAddressName')]",
-      "location": "[resourceGroup().location]",
-      "tags": {
-        "displayName": "PublicIPAddress"
+      {
+        "name": "adminUsername",
+        "type": "Microsoft.Compute.UserNameTextBox",
+        "label": "VM Admin Username",
+        "defaultValue": "otadmin",
+        "toolTip": "Admin username for the virtual machines.",
+        "constraints": { "required": true },
+        "osPlatform": "Windows"
       },
-      "properties": {
-        "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
-        "dnsSettings": {
-          "domainNameLabel": "[parameters('dnsNameForPublicIP')]"
+      {
+        "name": "adminPassword",
+        "type": "Microsoft.Compute.CredentialsCombo",
+        "label": {
+          "password": "Admin password",
+          "confirmPassword": "Confirm Admin password"
+        },
+        "toolTip": {
+          "password": "Password for VM Admin user."
+        },
+        "constraints": { "required": true },
+        "options": {
+          "hideConfirmation": true
+        },
+        "osPlatform": "Windows"
+      },
+      {
+        "name": "CSadminPassword",
+        "type": "Microsoft.Common.PasswordBox",
+        "label": {
+          "password": "Password for CS Administrator (Admin)",
+          "confirmPassword": "Confirm CS Admin password"
+        },
+        "toolTip": {
+          "password": "With this password you can login CS and CS admin page."
+        },
+        "constraints": {
+          "required": true,
+          "regex": "^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])|(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*])|(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])|(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])).{8,15}$",
+          "validationMessage": "The password must be at 8-15 characters, and 3 of one number, one lower case letter, one upper case letter, and one special character."
+        },
+        "options": {
+          "hideConfirmation": true
         }
       }
-    },
-    {
-      "apiVersion": "2015-05-01-preview",
-      "type": "Microsoft.Network/virtualNetworks",
-      "name": "[variables('virtualNetworkName')]",
-      "location": "[resourceGroup().location]",
-      "tags": {
-        "displayName": "VirtualNetwork"
-      },
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "[variables('addressPrefix')]"
-          ]
+    ],
+    "steps": [
+      {
+        "name": "Size",
+        "label": "VM Size",
+        "subLabel": {
+          "preValidation": "Choose virtual machine size",
+          "postValidation": "Done"
         },
-        "subnets": [
+        "bladeTitle": "VM Size",
+        "elements": [
+
           {
-            "name": "[variables('subnetName')]",
-            "properties": {
-              "addressPrefix": "[variables('subnetPrefix')]"
+            "name": "vmSize",
+            "type": "Microsoft.Compute.SizeSelector",
+            "label": "Virtual machine size",
+            "toolTip": "The size of the virtual machine.",
+            "recommendedSizes": [
+              "Standard_A3",
+              "Standard_A4",
+              "Standard_D3"
+            ],
+            "constraints": {
+              "allowedSizes": [
+                "Standard_A2",
+                "Standard_A3",
+                "Standard_A4",
+                "Standard_A5",
+                "Standard_A6",
+                "Standard_A7",
+                "Standard_A8",
+                "Standard_A9",
+                "Standard_A10",
+                "Standard_A11",
+                "Standard_D2",
+                "Standard_D3",
+                "Standard_D4",
+                "Standard_D12",
+                "Standard_D13",
+                "Standard_D14"
+              ]
+            },
+            "osPlatform": "Windows",
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2012-R2-Datacenter"
             }
           }
         ]
-      }
-    },
-    {
-      "apiVersion": "2015-05-01-preview",
-      "type": "Microsoft.Network/networkInterfaces",
-      "name": "[variables('nicName')]",
-      "location": "[resourceGroup().location]",
-      "tags": {
-        "displayName": "NetworkInterface"
       },
-      "dependsOn": [
-        "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
-        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
-      ],
-      "properties": {
-        "ipConfigurations": [
+      {
+        "name": "AzureSQLConfig",
+        "label": "Azure SQL",
+        "subLabel": {
+          "preValidation": "Configure Azure SQL settings",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "Azure SQL settings",
+        "elements": [
+
           {
-            "name": "ipconfig1",
-            "properties": {
-              "privateIPAllocationMethod": "Dynamic",
-              "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))]"
-              },
+            "name": "varsqldatabaseName",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Database Name",
+            "toolTip": "The Content Server Database Name",
+            "defaultValue": "OTCS",
+            "constraints": {
+              "required": true,
+              "regex": "^[a-z0-9A-Z_-]{1,10}$",
+              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+            }
+          },
+          {
+            "name": "vardbserverName",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Azure SQL Server Name",
+            "toolTip": "The Name for Azure SQL Server",
+            "defaultValue": "",
+            "constraints": {
+              "required": true,
+              "regex": "^[(a-z0-9)]{3,10}$",
+              "validationMessage": "Only lower case letters and numbers are allowed, and the value must be 3-10 characters long."
+            }
+          },
+          {
+            "name": "vardbserverAdminLogin",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Azure SQL login",
+            "toolTip": "The Admin Username for Azure SQL database",
+            "defaultValue": "otadmin",
+            "constraints": {
+              "required": true,
+              "regex": "^[a-z0-9A-Z_-]{1,15}$",
+              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-15 characters long."
+            }
+          },
+          {
+            "name": "vardbserverAdminLoginPassword",
+            "type": "Microsoft.Common.PasswordBox",
+            "label": {
+              "password": "Azure SQL Admin Password",
+              "confirmPassword": "Confirm password"
+            },
+            "toolTip": {
+              "password": "The Password for Azure SQL Admin User."
+            },
+            "constraints": {
+              "required": true,
+              "regex": "^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])|(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*])|(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])|(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])).{8,72}$",
+              "validationMessage": "The password must be at least 8 characters, and 3 of one number, one lower case letter, one upper case letter, and one special character."
+            },
+            "options": {
+              "hideConfirmation": true
+            }
+          },
+
+          {
+            "name": "varsqldatabaseEdition",
+            "type": "Microsoft.Common.DropDown",
+            "label": "Azure SQL Edition",
+            "defaultValue": "Standard Edition",
+            "toolTip": "",
+            "constraints": {
+              "allowedValues": [
+                {
+                  "label": "Standard Edition",
+                  "value": "Standard"
+                },
+                {
+                  "label": "Premium Edition",
+                  "value": "Premium"
+                },
+                {
+                  "label": "Business Edition",
+                  "value": "Business"
+                }
+              ]
+            }
+          }
+
+        ]
+      },
+      {
+        "name": "Settings",
+        "label": "Settings",
+        "subLabel": {
+          "preValidation": "Configure infrastructure features",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "Infrastructure settings",
+        "elements": [
+          {
+            "name": "storageAccount",
+            "type": "Microsoft.Storage.StorageAccountSelector",
+            "label": "Storage account",
+            "defaultValue": {
+              "type": "Standard_LRS"
+            },
+            "constraints": {
+              "allowedTypes": [ "Standard_LRS" ]
+            }
+          },
+          {
+            "name": "dnsAndPublicIP",
+            "type": "Microsoft.Network.PublicIpAddressCombo",
+            "label": {
+              "publicIpAddress": "Public IP address",
+              "domainNameLabel": "DNS Prefix"
+            },
+            "toolTip": {
+              "domainNameLabel": "DNS Prefix for the VM public IP addresses."
+            },
+            "defaultValue": {
+              "publicIpAddressName": "CSPublicIP"
+            },
+            "options": {
+              "hideNone": true
+            }
+          }
+        ]
+      },
+      {
+        "name": "networkInfo",
+        "label": "Virtual network",
+        "subLabel": {
+          "preValidation": "Virtual network configuration",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "Virtual network information",
+        "elements": [
+          {
+            "name": "virtualNetwork",
+            "type": "Microsoft.Network.VirtualNetworkCombo",
+            "label": {
+              "virtualNetwork": "Virtual network",
+              "subnets": "Subnets"
+            },
+            "toolTip": {
+              "virtualNetwork": "Virtual machine can be deployed into a new or existing virtual network",
+              "subnets": "For a new virtual network, the deployment will create one subnet"
+            },
+            "defaultValue": {
+              "name": "CSVNET",
+              "addressPrefixSize": "/16"
+            },
+            "constraints": {
+              "minAddressPrefixSize": "/16"
+            },
+            "subnets": {
               "subnet": {
-                "id": "[variables('subnetRef')]"
+                "label": "Subnet",
+                "defaultValue": {
+                  "name": "cs_subnet",
+                  "addressPrefixSize": "/24"
+                },
+                "constraints": {
+                  "minAddressPrefixSize": "/24",
+                  "minAddressCount": 1,
+                  "requireContiguousAddresses": false
+                }
               }
             }
           }
         ]
       }
-    },
-    {
-      "apiVersion": "2015-06-15",
-
-      "type": "Microsoft.Compute/virtualMachines",
-
-      "name": "[parameters('vmName')]",
-      "location": "[resourceGroup().location]",
-      "tags": {
-        "displayName": "VirtualMachine"
-      },
-      "dependsOn": [
-        "[concat('Microsoft.Storage/storageAccounts/', variables('vhdStorageName'))]",
-        "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]",
-        "[concat('Microsoft.Sql/servers/', parameters('vardbserverName'))]"
-      ],
-      "properties": {
-        "hardwareProfile": {
-          "vmSize": "[parameters('vmSize')]"
-        },
-        "osProfile": {
-          "computerName": "[parameters('vmName')]",
-          "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": "[parameters('adminPassword')]"
-        },
-          "storageProfile": {
-            "imageReference": {
-              "publisher": "OpenText",
-              "offer": "ot-cs-azuredb",
-              "sku": "ot-cs-adb",
-              "version": "latest"
-            },
-            "osDisk": {
-              "name": "osdisk",
-              "vhd": {
-                "uri": "[concat('http://', parameters('StorageAccountName'), '.blob.core.windows.net/vhds/', 'osdisk.vhd')]"
-              },
-              "caching": "ReadWrite",
-              "createOption": "FromImage"
-            }
-          },
-        "networkProfile": {
-          "networkInterfaces": [
-            {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
-            }
-          ]
-        },
-        "diagnosticsProfile": {
-          "bootDiagnostics": {
-            "enabled": true,
-            "storageUri": "[concat('http://', variables('diagnosticsStorageName'), '.blob.core.windows.net')]"
-          }
-        }
-      },
-      "resources": [
-        {
-          "type": "extensions",
-          "name": "Microsoft.Insights.VMDiagnosticsSettings",
-          "apiVersion": "2015-06-15",
-          "location": "[resourceGroup().location]",
-          "tags": {
-            "displayName": "AzureDiagnostics"
-          },
-          "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
-          ],
-          "properties": {
-            "publisher": "Microsoft.Azure.Diagnostics",
-            "type": "IaaSDiagnostics",
-            "typeHandlerVersion": "1.5",
-            "autoUpgradeMinorVersion": true,
-            "settings": {
-              "xmlCfg": "[base64(concat(variables('wadcfgxstart'), variables('wadmetricsresourceid'), variables('wadcfgxend')))]",
-              "storageAccount": "[variables('diagnosticsStorageName')]"
-            },
-            "protectedSettings": {
-              "storageAccountName": "[variables('diagnosticsStorageName')]",
-              "storageAccountKey": "[listkeys(variables('accountid'), '2015-06-15').key1]",
-              "storageAccountEndPoint": "https://core.windows.net"
-            }
-          }
-        },
-        {
-          "name": "CreateCSscript",
-          "type": "extensions",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2015-06-15",
-          "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
-          ],
-          "tags": {
-            "displayName": "CreateCSscript"
-          },
-          "properties": {
-            "publisher": "Microsoft.Compute",
-            "type": "CustomScriptExtension",
-            "typeHandlerVersion": "1.4",
-            "autoUpgradeMinorVersion": true,
-            "settings": {
-              "fileUris": [ "https://raw.githubusercontent.com/nhess1981/otcs/master/CreateCSimage.ps1" ],
-              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File',' CreateCSimage.ps1',' -ReplaceDBServer ', parameters('vardbserverName'), ' -ReplaceDBName ', parameters('varsqldatabaseName'), ' -ReplaceDBUser ', parameters('vardbserverAdminLogin'), ' -ReplaceDBPassword ', parameters('vardbserverAdminLoginPassword'),' -ReplaceAPassword ', parameters('CSadminPassword'))]"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "[parameters('vardbserverName')]",
-      "type": "Microsoft.Sql/servers",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2014-04-01-preview",
-      "dependsOn": [ ],
-      "tags": {
-        "displayName": "vardbserver"
-      },
-      "properties": {
-        "administratorLogin": "[parameters('vardbserverAdminLogin')]",
-        "administratorLoginPassword": "[parameters('vardbserverAdminLoginPassword')]",
-        "version": "12.0"
-      },
-      "resources": [
-        {
-          "name": "AllowAllWindowsAzureIps",
-          "type": "firewallrules",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2014-04-01-preview",
-          "dependsOn": [
-            "[concat('Microsoft.Sql/servers/', parameters('vardbserverName'))]"
-          ],
-          "properties": {
-            "startIpAddress": "0.0.0.0",
-            "endIpAddress": "0.0.0.0"
-          }
-        },
-        {
-          "name": "[parameters('varsqldatabaseName')]",
-          "type": "databases",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2014-04-01-preview",
-          "dependsOn": [
-            "[parameters('vardbserverName')]"
-          ],
-          "tags": {
-            "displayName": "varsqldatabase"
-          },
-          "properties": {
-            "collation": "[variables('varsqldatabaseCollation')]",
-            "edition": "[parameters('varsqldatabaseEdition')]",
-            "maxSizeBytes": "1073741824"
-          }
-        }
-      ]
+    ],
+    "outputs": {
+      "location": "[location()]",
+      "vmName": "[basics('vmName')]",
+      "adminUsername": "[basics('adminUsername')]",
+      "adminPassword": "[basics('adminPassword')]",
+      "CSadminPassword": "[basics('CSadminPassword')]",
+      "vmSize": "[steps('Size').vmSize]",
+      "vardbserverAdminLogin": "[steps('AzureSQLConfig').vardbserverAdminLogin]",
+      "vardbserverAdminLoginPassword": "[steps('AzureSQLConfig').vardbserverAdminLoginPassword]",
+      "varsqldatabaseName": "[steps('AzureSQLConfig').varsqldatabaseName]",
+      "vardbserverName": "[steps('AzureSQLConfig').vardbserverName]",
+      "varsqldatabaseEdition": "[steps('AzureSQLConfig').varsqldatabaseEdition]",
+      "storageAccountNewOrExisting": "[steps('Settings').storageAccount.newOrExisting]",
+      "StorageAccountName": "[steps('Settings').storageAccount.name]",
+      "storageAccountType": "[steps('Settings').storageAccount.type]",
+      "existingStorageAccountRG": "[steps('Settings').storageAccount.resourceGroup]",
+      "domainName": "[steps('Settings').domainName]",
+      "publicIPAddressName": "[steps('Settings').dnsAndPublicIP.name]",
+      "dnsNameForPublicIP": "[steps('Settings').dnsAndPublicIP.domainNameLabel]",
+      "existingIPRGName": "[steps('Settings').dnsAndPublicIP.resourceGroup]",
+      "publicIPNewOrExisting": "[steps('Settings').dnsAndPublicIP.newOrExistingOrNone]",
+      "vnetNewOrExisting": "[steps('networkInfo').virtualNetwork.newOrExisting]",
+      "vnetResourceGroup": "[steps('networkInfo').virtualNetwork.resourceGroup]",
+      "vnetName": "[steps('networkInfo').virtualNetwork.name]",
+      "vnetAddressPrefix": "[steps('networkInfo').virtualNetwork.addressPrefix]",
+      "subnetName": "[steps('networkInfo').virtualNetwork.subnets.subnet.name]",
+      "subnetAddressPrefix": "[steps('networkInfo').virtualNetwork.subnets.subnet.addressPrefix]"
     }
-  ]
+  }
 }
