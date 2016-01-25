@@ -1,3 +1,4 @@
+
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
@@ -196,12 +197,6 @@
       "type": "Microsoft.Compute/virtualMachines",
 
       "name": "[parameters('vmName')]",
-      /*  "plan": {
-            "name": "ot-cs-adb",
-            "publisher": "opentext",
-            "product": "ot-cs-azuredb"
-          },
-        */
       "location": "[resourceGroup().location]",
       "tags": {
         "displayName": "VirtualMachine"
@@ -220,40 +215,22 @@
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
-        "storageProfile": {
-          "osDisk": {
-            "osType": "Windows",
-            "name": "[concat(parameters('vmName'),'-osDisk')]",
-            "createOption": "FromImage",
-            "image": {
-              "uri": "https://csazuredbtempl5097.blob.core.windows.net/system/Microsoft.Compute/Images/azuredbimages/otcs3-osDisk.08f91095-248c-451f-a02f-e2c8027a01f9.vhd"
-            },
-            "vhd": {
-              "uri": "[concat('https://csazuredbtempl5097.blob.core.windows.net/vhds/',parameters('vmName'),'osDisk.vhd')]"
-            },
-            "caching": "ReadWrite"
-          }
-        },
-
-        /*    
           "storageProfile": {
             "imageReference": {
               "publisher": "OpenText",
               "offer": "ot-cs-azuredb",
               "sku": "ot-cs-adb",
-              "version": "1.1.0"
+              "version": "latest"
             },
             "osDisk": {
               "name": "osdisk",
               "vhd": {
                 "uri": "[concat('http://', parameters('StorageAccountName'), '.blob.core.windows.net/vhds/', 'osdisk.vhd')]"
-                "uri": "[concat('http://', variables('vhdStorageName'), '.blob.core.windows.net/', variables('vhdStorageContainerName'), '/', variables('OSDiskName'), '.vhd')]"
               },
               "caching": "ReadWrite",
               "createOption": "FromImage"
             }
           },
-         */
         "networkProfile": {
           "networkInterfaces": [
             {
