@@ -28,11 +28,11 @@
         "name": "adminPassword",
         "type": "Microsoft.Common.PasswordBox",
         "label": {
-          "password": "Password for CS Administrator (Admin)",
-          "confirmPassword": "Confirm CS Admin password"
+          "password": "Password for VM Admin user",
+          "confirmPassword": "Confirm Admin password"
         },
         "toolTip": {
-          "password": "With this password you can login CS and CS admin page."
+          "password": "Password for VM Admin user."		
         },
         "constraints": {
           "required": true,
