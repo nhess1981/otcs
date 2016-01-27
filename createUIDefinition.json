@@ -178,7 +178,6 @@
               "hideConfirmation": true
             }
           },
-
           {
             "name": "varsqldatabaseEdition",
             "type": "Microsoft.Common.DropDown",
@@ -202,7 +201,6 @@
               ]
             }
           }
-
         ]
       },
       {
