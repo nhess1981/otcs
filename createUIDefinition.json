@@ -143,8 +143,8 @@
             "defaultValue": "",
             "constraints": {
               "required": true,
-              "regex": "^[(a-z0-9)]{3,10}$",
-              "validationMessage": "Only lower case letters and numbers are allowed, and the value must be 3-10 characters long."
+              "regex": "^[(a-z0-9)]{3,15}$",
+              "validationMessage": "Only lower case letters and numbers are allowed, and the value must be 3-15 characters long."
             }
           },
           {
