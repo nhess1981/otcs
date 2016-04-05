@@ -5,26 +5,7 @@
   "parameters": {
     "location": {
       "type": "string",
-      "allowedValues": [
-        "westus",
-        "eastus2",
-        "centralus",
-        "southcentralus",
-        "northcentralus",
-        "westeurope",
-        "northeurope",
-        "eastasia",
-        "southeastasia",
-        "japanwest",
-        "japaneast",
-        "brazilsouth",
-        "australiaeast",
-        "australiasoutheast",
-        "centralindia",
-        "westindia",
-        "southindia",
-        "centralindia"
-      ],
+      "allowedValues": [],
       "metadata": { "description": "Location" }
     },
     "adminUsername": {
@@ -55,22 +36,7 @@
     "vmSize": {
       "type": "string",
       "defaultValue": "Standard_A3",
-      "allowedValues": [
-        "Standard_A3",
-        "Standard_A4",
-        "Standard_A5",
-        "Standard_A6",
-        "Standard_A7",
-        "Standard_A8",
-        "Standard_A9",
-        "Standard_A10",
-        "Standard_A11",
-        "Standard_D3",
-        "Standard_D4",
-        "Standard_D12",
-        "Standard_D13",
-        "Standard_D14"
-      ],
+      "allowedValues": [],
       "metadata": {
         "description": "This is the size of your VM"
       }
