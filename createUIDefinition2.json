@@ -226,6 +226,11 @@
             "defaultValue": {
               "publicIpAddressName": "CSPublicIP"
             },
+            "constraints": {
+              "required": {
+                       "domainNameLabel": true
+                     }
+            },
             "options": {
               "hideNone": true
             }
