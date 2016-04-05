@@ -1,0 +1,319 @@
+{
+  "handler": "Microsoft.Compute.MultiVm",
+  "version": "0.0.1-preview",
+  "parameters": {
+    "basics": [
+      {
+        "name": "vmName",
+        "type": "Microsoft.Common.TextBox",
+        "label": "Virtual machine name",
+        "defaultValue": "cs105",
+        "toolTip": "The Name for your Virtual Machine.",
+        "constraints": {
+          "required": true,
+          "regex": "^[a-z0-9A-Z]{1,10}$",
+          "validationMessage": "Only low letters and numbers are allowed, and the value must be 1-10 characters long."
+        }
+      },
+      {
+        "name": "adminUsername",
+        "type": "Microsoft.Compute.UserNameTextBox",
+        "label": "VM Admin Username",
+        "defaultValue": "otadmin",
+        "toolTip": "Admin username for the virtual machines.",
+        "constraints": { "required": true },
+        "osPlatform": "Windows"
+      },
+      {
+        "name": "adminPassword",
+        "type": "Microsoft.Common.PasswordBox",
+        "label": {
+          "password": "Password for VM Admin user",
+          "confirmPassword": "Confirm Admin password"
+        },
+        "toolTip": {
+          "password": "Password for VM Admin user."		
+        },
+        "constraints": {
+          "required": true,
+          "regex": "^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])|(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*])|(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])|(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])).{8,15}$",
+          "validationMessage": "The password must be at 8-15 characters, and 3 of one number, one lower case letter, one upper case letter, and one special character."
+        },
+        "options": {
+          "hideConfirmation": true
+        }
+      },
+      {
+        "name": "CSadminPassword",
+        "type": "Microsoft.Common.PasswordBox",
+        "label": {
+          "password": "Password for CS Administrator (Admin)",
+          "confirmPassword": "Confirm CS Admin password"
+        },
+        "toolTip": {
+          "password": "With this password you can login CS and CS admin page."
+        },
+        "constraints": {
+          "required": true,
+          "regex": "^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])|(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*])|(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])|(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])).{8,15}$",
+          "validationMessage": "The password must be at 8-15 characters, and 3 of one number, one lower case letter, one upper case letter, and one special character."
+        },
+        "options": {
+          "hideConfirmation": true
+        }
+      }
+    ],
+    "steps": [
+      {
+        "name": "Size",
+        "label": "VM Size",
+        "subLabel": {
+          "preValidation": "Choose virtual machine size",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "VM Size",
+        "elements": [
+
+          {
+            "name": "vmSize",
+            "type": "Microsoft.Compute.SizeSelector",
+            "label": "Virtual machine size",
+            "toolTip": "The size of the virtual machine.",
+            "recommendedSizes": [
+              "Standard_A3",
+              "Standard_A4",
+              "Standard_D3"
+            ],
+            "constraints": {
+              "allowedSizes": [
+                "Standard_A2",
+                "Standard_A3",
+                "Standard_A4",
+                "Standard_A5",
+                "Standard_A6",
+                "Standard_A7",
+                "Standard_A8",
+                "Standard_A9",
+                "Standard_A10",
+                "Standard_A11",
+                "Standard_D2",
+                "Standard_D3",
+                "Standard_D4",
+                "Standard_D12",
+                "Standard_D13",
+                "Standard_D14"
+              ]
+            },
+            "osPlatform": "Windows",
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2012-R2-Datacenter"
+            }
+          }
+        ]
+      },
+      {
+        "name": "AzureSQLConfig",
+        "label": "Azure SQL",
+        "subLabel": {
+          "preValidation": "Configure Azure SQL settings",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "Azure SQL settings",
+        "elements": [
+
+          {
+            "name": "varsqldatabaseName",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Database Name",
+            "toolTip": "The Content Server Database Name",
+            "defaultValue": "OTCS",
+            "constraints": {
+              "required": true,
+              "regex": "^[a-z0-9A-Z_-]{1,10}$",
+              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+            }
+          },
+          {
+            "name": "vardbserverName",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Azure SQL Server Name",
+            "toolTip": "The Name for Azure SQL Server",
+            "defaultValue": "",
+            "constraints": {
+              "required": true,
+              "regex": "^[(a-z0-9)]{3,15}$",
+              "validationMessage": "Only lower case letters and numbers are allowed, and the value must be 3-15 characters long."
+            }
+          },
+          {
+            "name": "vardbserverAdminLogin",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Azure SQL login",
+            "toolTip": "The Admin Username for Azure SQL database",
+            "defaultValue": "otadmin",
+            "constraints": {
+              "required": true,
+              "regex": "^[a-z0-9A-Z_-]{1,15}$",
+              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-15 characters long."
+            }
+          },
+          {
+            "name": "vardbserverAdminLoginPassword",
+            "type": "Microsoft.Common.PasswordBox",
+            "label": {
+              "password": "Azure SQL Admin Password",
+              "confirmPassword": "Confirm password"
+            },
+            "toolTip": {
+              "password": "The Password for Azure SQL Admin User."
+            },
+            "constraints": {
+              "required": true,
+              "regex": "^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])|(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*])|(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])|(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])).{8,72}$",
+              "validationMessage": "The password must be at least 8 characters, and 3 of one number, one lower case letter, one upper case letter, and one special character."
+            },
+            "options": {
+              "hideConfirmation": true
+            }
+          },
+          {
+            "name": "varsqldatabaseEdition",
+            "type": "Microsoft.Common.DropDown",
+            "label": "Azure SQL Edition",
+            "defaultValue": "Standard Edition",
+            "toolTip": "",
+            "constraints": {
+              "allowedValues": [
+                {
+                  "label": "Standard Edition",
+                  "value": "Standard"
+                },
+                {
+                  "label": "Premium Edition",
+                  "value": "Premium"
+                },
+                {
+                  "label": "Business Edition",
+                  "value": "Business"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Settings",
+        "label": "Settings",
+        "subLabel": {
+          "preValidation": "Configure infrastructure features",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "Infrastructure settings",
+        "elements": [
+          {
+            "name": "storageAccount",
+            "type": "Microsoft.Storage.StorageAccountSelector",
+            "label": "Storage account",
+            "defaultValue": {
+              "type": "Standard_LRS"
+            },
+            "constraints": {
+              "allowedTypes": [ "Standard_LRS" ]
+            }
+          },
+          {
+            "name": "dnsAndPublicIP",
+            "type": "Microsoft.Network.PublicIpAddressCombo",
+            "label": {
+              "publicIpAddress": "Public IP address",
+              "domainNameLabel": "DNS Prefix"
+            },
+            "toolTip": {
+              "domainNameLabel": "DNS Prefix for the VM public IP addresses."
+            },
+            "defaultValue": {
+              "publicIpAddressName": "CSPublicIP"
+            },
+            "options": {
+              "hideNone": true
+            }
+          }
+        ]
+      },
+      {
+        "name": "networkInfo",
+        "label": "Virtual network",
+        "subLabel": {
+          "preValidation": "Virtual network configuration",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "Virtual network information",
+        "elements": [
+          {
+            "name": "virtualNetwork",
+            "type": "Microsoft.Network.VirtualNetworkCombo",
+            "label": {
+              "virtualNetwork": "Virtual network",
+              "subnets": "Subnets"
+            },
+            "toolTip": {
+              "virtualNetwork": "Virtual machine can be deployed into a new or existing virtual network",
+              "subnets": "For a new virtual network, the deployment will create one subnet"
+            },
+            "defaultValue": {
+              "name": "CSVNET",
+              "addressPrefixSize": "/16"
+            },
+            "constraints": {
+              "minAddressPrefixSize": "/16"
+            },
+            "subnets": {
+              "subnet": {
+                "label": "Subnet",
+                "defaultValue": {
+                  "name": "cs_subnet",
+                  "addressPrefixSize": "/24"
+                },
+                "constraints": {
+                  "minAddressPrefixSize": "/24",
+                  "minAddressCount": 1,
+                  "requireContiguousAddresses": false
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "outputs": {
+      "location": "[location()]",
+      "vmName": "[basics('vmName')]",
+      "adminUsername": "[basics('adminUsername')]",
+      "adminPassword": "[basics('adminPassword')]",
+      "CSadminPassword": "[basics('CSadminPassword')]",
+      "vmSize": "[steps('Size').vmSize]",
+      "vardbserverAdminLogin": "[steps('AzureSQLConfig').vardbserverAdminLogin]",
+      "vardbserverAdminLoginPassword": "[steps('AzureSQLConfig').vardbserverAdminLoginPassword]",
+      "varsqldatabaseName": "[steps('AzureSQLConfig').varsqldatabaseName]",
+      "vardbserverName": "[steps('AzureSQLConfig').vardbserverName]",
+      "varsqldatabaseEdition": "[steps('AzureSQLConfig').varsqldatabaseEdition]",
+      "storageAccountNewOrExisting": "[steps('Settings').storageAccount.newOrExisting]",
+      "storageAccountName": "[steps('Settings').storageAccount.name]",
+      "storageAccountType": "[steps('Settings').storageAccount.type]",
+      "existingStorageAccountRG": "[steps('Settings').storageAccount.resourceGroup]",
+      "domainName": "[steps('Settings').domainName]",
+      "publicIPAddressName": "[steps('Settings').dnsAndPublicIP.name]",
+      "dnsNameForPublicIP": "[steps('Settings').dnsAndPublicIP.domainNameLabel]",
+      "existingIPRGName": "[steps('Settings').dnsAndPublicIP.resourceGroup]",
+      "publicIPNewOrExisting": "[steps('Settings').dnsAndPublicIP.newOrExistingOrNone]",
+      "vnetNewOrExisting": "[steps('networkInfo').virtualNetwork.newOrExisting]",
+      "vnetResourceGroup": "[steps('networkInfo').virtualNetwork.resourceGroup]",
+      "vnetName": "[steps('networkInfo').virtualNetwork.name]",
+      "vnetAddressPrefix": "[steps('networkInfo').virtualNetwork.addressPrefix]",
+      "subnetName": "[steps('networkInfo').virtualNetwork.subnets.subnet.name]",
+      "subnetAddressPrefix": "[steps('networkInfo').virtualNetwork.subnets.subnet.addressPrefix]"
+    }
+  }
+}
