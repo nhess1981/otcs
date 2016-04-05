@@ -183,10 +183,6 @@
                 {
                   "label": "Premium Edition",
                   "value": "Premium"
-                },
-                {
-                  "label": "Business Edition",
-                  "value": "Business"
                 }
               ]
             }
