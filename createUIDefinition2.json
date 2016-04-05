@@ -44,7 +44,7 @@
       },
       {
         "name": "CSadminPassword",
-        "type": "Microsoft.Common.PasswordBox",
+        "type": "Microsoft.Compute.CredentialsCombo",
         "label": {
           "password": "Password for CS Administrator (Admin)",
           "confirmPassword": "Confirm CS Admin password"
@@ -59,7 +59,8 @@
         },
         "options": {
           "hideConfirmation": true
-        }
+        },
+         "osPlatform": "Windows"
       }
     ],
     "steps": [
@@ -155,7 +156,7 @@
           },
           {
             "name": "vardbserverAdminLoginPassword",
-            "type": "Microsoft.Common.PasswordBox",
+            "type": "Microsoft.Compute.CredentialsCombo",
             "label": {
               "password": "Azure SQL Admin Password",
               "confirmPassword": "Confirm password"
@@ -170,7 +171,8 @@
             },
             "options": {
               "hideConfirmation": true
-            }
+            },
+             "osPlatform": "Windows"
           },
           {
             "name": "varsqldatabaseEdition",
