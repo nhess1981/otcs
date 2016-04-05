@@ -259,20 +259,20 @@
             },
             "defaultValue": {
               "name": "CSVNET",
-              "addressPrefixSize": "/16"
+              "addressPrefixSize": "/27"
             },
             "constraints": {
-              "minAddressPrefixSize": "/16"
+              "minAddressPrefixSize": "/27"
             },
             "subnets": {
               "subnet": {
                 "label": "Subnet",
                 "defaultValue": {
                   "name": "cs_subnet",
-                  "addressPrefixSize": "/24"
+                  "addressPrefixSize": "/28"
                 },
                 "constraints": {
-                  "minAddressPrefixSize": "/24",
+                  "minAddressPrefixSize": "/28",
                   "minAddressCount": 1,
                   "requireContiguousAddresses": false
                 }
