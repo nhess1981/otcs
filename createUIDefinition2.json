@@ -17,7 +17,7 @@
       },
       {
         "name": "adminUsername",
-        "type": "Microsoft.Compute.CredentialsCombo",
+        "type": "Microsoft.Compute.UserNameTextBox",
         "label": "VM Admin Username",
         "defaultValue": "otadmin",
         "toolTip": "Admin username for the virtual machines.",
@@ -26,7 +26,7 @@
       },
       {
         "name": "adminPassword",
-        "type": "Microsoft.Common.PasswordBox",
+        "type": "Microsoft.Compute.CredentialsCombo",
         "label": {
           "password": "Password for VM Admin user",
           "confirmPassword": "Confirm Admin password"
@@ -34,13 +34,13 @@
         "toolTip": {
           "password": "Password for VM Admin user."		
         },
-          "constraints": {
-            "required": true
-          },
-          "options": {
-            "hideConfirmation": false
-          },
-        "osPlatform": "Windows"
+        "constraints": {
+          "required": true
+        },
+        "options": {
+          "hideConfirmation": true
+        }
+         "osPlatform": "Windows"
       },
       {
         "name": "CSadminPassword",
