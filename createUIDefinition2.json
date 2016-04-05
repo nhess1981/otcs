@@ -53,10 +53,7 @@
           "password": "With this password you can login CS and CS admin page."
         },
         "constraints": {
-          "required": true,
-          "regex": "^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])|(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*])|(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])|(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])).{8,15}$",
-          "validationMessage": "The password must be at 8-15 characters, and 3 of one number, one lower case letter, one upper case letter, and one special character."
-        },
+          "required": true},
         "options": {
           "hideConfirmation": true
         },
@@ -165,10 +162,7 @@
               "password": "The Password for Azure SQL Admin User."
             },
             "constraints": {
-              "required": true,
-              "regex": "^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])|(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*])|(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])|(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])).{8,72}$",
-              "validationMessage": "The password must be at least 8 characters, and 3 of one number, one lower case letter, one upper case letter, and one special character."
-            },
+              "required": true},
             "options": {
               "hideConfirmation": true
             },
