@@ -5,7 +5,7 @@
   "parameters": {
     "location": {
       "type": "string",
-      "allowedValues": [],
+      "allowedValues": [ ],
       "metadata": { "description": "Location" }
     },
     "adminUsername": {
@@ -36,7 +36,7 @@
     "vmSize": {
       "type": "string",
       "defaultValue": "Standard_A3",
-      "allowedValues": [],
+      "allowedValues": [ ],
       "metadata": {
         "description": "This is the size of your VM"
       }
@@ -173,14 +173,21 @@
       "metadata": {
         "description": "Virtual Network subnet Address Prefix"
       }
+    },
+    "baseUrl": {
+      "type": "string",
+      "metadata": {
+        "description": "The base URL for dependent assets",
+        "artifactsBaseUrl": ""
+      },
+      "defaultValue": "https: //raw.githubusercontent.com/nhess1981/otcs/master"
     }
   },
   "variables": {
-    "baseUrl": "https://raw.githubusercontent.com/nhess1981/otcs/master/",
     "nicName": "[parameters('vmName')]",
-    "storageAccountSetupURL": "[concat(variables('baseUrl'),'/storageAccount-',parameters('storageAccountNewOrExisting'),'.json')]",
-    "publicIPAdressSetupURL": "[concat(variables('baseUrl'),'/publicip-',parameters('publicIPNewOrExisting'),'.json')]",
-    "virtualNetworksURL": "[concat(variables('baseUrl'),'vnet-',parameters('vnetNewOrExisting'),'.json')]",
+    "storageAccountSetupURL": "[concat(parameters('baseUrl'),'/storageAccount-',parameters('storageAccountNewOrExisting'),'.json')]",
+    "publicIPAdressSetupURL": "[concat(parameters('baseUrl'),'/publicip-',parameters('publicIPNewOrExisting'),'.json')]",
+    "virtualNetworksURL": "[concat(parameters('baseUrl'),'vnet-',parameters('vnetNewOrExisting'),'.json')]",
     "subnetID": "[concat(variables('vnetID'), '/subnets/', parameters('subnetName'))]",
     "varsqldatabaseCollation": "SQL_Latin1_General_CP1_CI_AS",
     "vnetID": "[resourceId(parameters('vnetResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
@@ -278,7 +285,7 @@
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('nicName')]",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('location')]",
       "tags": {
         "displayName": "NetworkInterface"
       },
@@ -318,7 +325,7 @@
         "product": "ot-cs-azuredb-preview"
 
       },
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('location')]",
       "tags": {
         "displayName": "VirtualMachine"
       },
@@ -364,7 +371,7 @@
         {
           "name": "CreateCSscript",
           "type": "extensions",
-          "location": "[resourceGroup().location]",
+          "location": "[parameters('location')]",
           "apiVersion": "2015-06-15",
           "dependsOn": [
             "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
@@ -378,17 +385,17 @@
             "typeHandlerVersion": "1.4",
             "autoUpgradeMinorVersion": true,
             "settings": {
-              "fileUris": ["[concat(variables('baseUrl'),'/CreateCSimage.ps1')]"],
+              "fileUris": [ "[concat(variables('baseUrl'),'/CreateCSimage.ps1')]" ],
               "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File',' CreateCSimage.ps1',' -ReplaceDBServer ', parameters('vardbserverName'), ' -ReplaceDBName ', parameters('varsqldatabaseName'), ' -ReplaceDBUser ', parameters('vardbserverAdminLogin'), ' -ReplaceDBPassword ', parameters('vardbserverAdminLoginPassword'),' -ReplaceAPassword ', parameters('CSadminPassword'))]"
             }
           }
         }
       ]
     },
-      {
+    {
       "name": "[parameters('vardbserverName')]",
       "type": "Microsoft.Sql/servers",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('location')]",
       "apiVersion": "2014-04-01-preview",
       "dependsOn": [ ],
       "tags": {
@@ -404,7 +411,7 @@
         {
           "name": "AllowAllWindowsAzureIps",
           "type": "firewallrules",
-          "location": "[resourceGroup().location]",
+          "location": "[parameters('location')]",
           "apiVersion": "2014-04-01-preview",
           "dependsOn": [
             "[concat('Microsoft.Sql/servers/', parameters('vardbserverName'))]"
@@ -417,7 +424,7 @@
         {
           "name": "[parameters('varsqldatabaseName')]",
           "type": "databases",
-          "location": "[resourceGroup().location]",
+          "location": "[parameters('location')]",
           "apiVersion": "2014-04-01-preview",
           "dependsOn": [
             "[parameters('vardbserverName')]"
