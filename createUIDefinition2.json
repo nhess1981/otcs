@@ -11,8 +11,8 @@
         "toolTip": "The Name for your Virtual Machine.",
         "constraints": {
           "required": true,
-          "regex": "^[a-z0-9A-Z]{1,10}$",
-          "validationMessage": "Only low letters and numbers are allowed, and the value must be 1-10 characters long."
+          "regex": "^[a-z0-9A-Z]{1,15}$",
+          "validationMessage": "Only low letters and numbers are allowed, and the value must be 1-15 characters long."
         }
       },
       {
