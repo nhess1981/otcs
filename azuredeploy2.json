@@ -322,7 +322,7 @@
 
         "publisher": "opentext",
 
-        "product": "ot-cs-azuredb-preview"
+        "product": "ot-cs-azuredb"
 
       },
       "location": "[parameters('location')]",
@@ -346,7 +346,7 @@
         "storageProfile": {
           "imageReference": {
             "publisher": "opentext",
-            "offer": "ot-cs-azuredb-preview",
+            "offer": "ot-cs-azuredb",
             "sku": "ot-cs-adb",
             "version": "latest"
           },
