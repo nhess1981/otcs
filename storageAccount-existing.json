@@ -13,12 +13,7 @@
     },
     "storageAccountType": {
       "type": "string",
-      "allowedValues": [
-        "Standard_LRS",
-        "Standard_GRS",
-        "Standard_RAGRS",
-        "Premium_LRS"
-      ],
+      "allowedValues": [],
       "metadata": {
         "Description": "The type of the Storage Account created"
       },
