@@ -385,8 +385,10 @@
             "typeHandlerVersion": "1.4",
             "autoUpgradeMinorVersion": true,
             "settings": {
-              "fileUris": [ "[concat(variables('baseUrl'),'/CreateCSimage.ps1')]" ],
-              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File',' CreateCSimage.ps1',' -ReplaceDBServer ', parameters('vardbserverName'), ' -ReplaceDBName ', parameters('varsqldatabaseName'), ' -ReplaceDBUser ', parameters('vardbserverAdminLogin'), ' -ReplaceDBPassword ', parameters('vardbserverAdminLoginPassword'),' -ReplaceAPassword ', parameters('CSadminPassword'))]"
+              "fileUris": [ "[concat(parameters('baseUrl'),'/CreateCSimage.ps1')]" ],
+             "protectedSettings": {
+                "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File',' CreateCSimage.ps1',' -ReplaceDBServer ', parameters('vardbserverName'), ' -ReplaceDBName ', parameters('varsqldatabaseName'), ' -ReplaceDBUser ', parameters('vardbserverAdminLogin'), ' -ReplaceDBPassword ', parameters('vardbserverAdminLoginPassword'),' -ReplaceAPassword ', parameters('CSadminPassword'))]"
+             }
             }
           }
         }
