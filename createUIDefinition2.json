@@ -282,7 +282,7 @@
       "location": "[location()]",
       "vmName": "[basics('vmName')]",
       "adminUsername": "[basics('adminUsername').password]",
-      "adminPassword": "[basics('adminPassword')]",
+      "adminPassword": "[basics('adminPassword').password]",
       "CSadminPassword": "[basics('CSadminPassword')]",
       "vmSize": "[steps('Size').vmSize]",
       "vardbserverAdminLogin": "[steps('AzureSQLConfig').vardbserverAdminLogin]",
