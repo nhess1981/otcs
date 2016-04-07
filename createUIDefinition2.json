@@ -281,7 +281,7 @@
     "outputs": {
       "location": "[location()]",
       "vmName": "[basics('vmName')]",
-      "adminUsername": "[basics('adminUsername.password')]",
+      "adminUsername": "[basics('adminUsername').password]",
       "adminPassword": "[basics('adminPassword')]",
       "CSadminPassword": "[basics('CSadminPassword')]",
       "vmSize": "[steps('Size').vmSize]",
