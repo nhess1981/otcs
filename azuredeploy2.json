@@ -180,14 +180,14 @@
         "description": "The base URL for dependent assets",
         "artifactsBaseUrl": ""
       },
-      "defaultValue": "https: //raw.githubusercontent.com/nhess1981/otcs/master"
+      "defaultValue": "https://raw.githubusercontent.com/nhess1981/otcs/master"
     }
   },
   "variables": {
     "nicName": "[parameters('vmName')]",
     "storageAccountSetupURL": "[concat(parameters('baseUrl'),'/storageAccount-',parameters('storageAccountNewOrExisting'),'.json')]",
     "publicIPAdressSetupURL": "[concat(parameters('baseUrl'),'/publicip-',parameters('publicIPNewOrExisting'),'.json')]",
-    "virtualNetworksURL": "[concat(parameters('baseUrl'),'vnet-',parameters('vnetNewOrExisting'),'.json')]",
+    "virtualNetworksURL": "[concat(parameters('baseUrl'),'/vnet-',parameters('vnetNewOrExisting'),'.json')]",
     "subnetID": "[concat(variables('vnetID'), '/subnets/', parameters('subnetName'))]",
     "varsqldatabaseCollation": "SQL_Latin1_General_CP1_CI_AS",
     "vnetID": "[resourceId(parameters('vnetResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
