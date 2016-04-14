@@ -128,18 +128,6 @@
             }
           },
           {
-            "name": "vardbserverName",
-            "type": "Microsoft.Common.TextBox",
-            "label": "Azure SQL Server Name",
-            "toolTip": "The Name for Azure SQL Server",
-            "defaultValue": "",
-            "constraints": {
-              "required": true,
-              "regex": "^[(a-z0-9)]{3,15}$",
-              "validationMessage": "Only lower case letters and numbers are allowed, and the value must be 3-15 characters long."
-            }
-          },
-          {
             "name": "vardbserverAdminLogin",
             "type": "Microsoft.Common.TextBox",
             "label": "Azure SQL login",
@@ -288,7 +276,6 @@
       "vardbserverAdminLogin": "[steps('AzureSQLConfig').vardbserverAdminLogin]",
       "vardbserverAdminLoginPassword": "[steps('AzureSQLConfig').vardbserverAdminLoginPassword.password]",
       "varsqldatabaseName": "[steps('AzureSQLConfig').varsqldatabaseName]",
-      "vardbserverName": "[steps('AzureSQLConfig').vardbserverName]",
       "varsqldatabaseEdition": "[steps('AzureSQLConfig').varsqldatabaseEdition]",
       "storageAccountNewOrExisting": "[steps('Settings').storageAccount.newOrExisting]",
       "storageAccountName": "[steps('Settings').storageAccount.name]",
