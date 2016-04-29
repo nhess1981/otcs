@@ -123,7 +123,7 @@
             "defaultValue": "OTCS",
             "constraints": {
               "required": true,
-              "regex": "^[a-z0-9A-Z_-]{1,10}$",
+              "regex": "^[a-zA-Z][a-zA-Z0-9]{0,9}$",
               "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
             }
           },
@@ -135,8 +135,8 @@
             "defaultValue": "otadmin",
             "constraints": {
               "required": true,
-              "regex": "^[a-z0-9A-Z_-]{1,15}$",
-              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-15 characters long."
+              "regex": "^(?!admin$|administrator$|sa$|root$|dbmanager$|loginmanager$|dbo$|guest$|information_schema$|sys$|db_accessadmin$|db_backupoperator$|db_datareader$|db_datawriter$|db_ddladmin$|db_denydatareader$|db_denydatawriter$|db_owner$|db_securityadmin$|public$)[a-zA-Z][a-zA-Z0-9]{1,9}$",
+              "validationMessage": "Only letters and numbers are allowed, and the value must be 2-10 characters long and starts with a letter."
             }
           },
           {
