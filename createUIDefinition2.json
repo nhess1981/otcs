@@ -136,7 +136,7 @@
             "constraints": {
               "required": true,
               "regex": "^(?!admin$|administrator$|sa$|root$|dbmanager$|loginmanager$|dbo$|guest$|information_schema$|sys$|db_accessadmin$|db_backupoperator$|db_datareader$|db_datawriter$|db_ddladmin$|db_denydatareader$|db_denydatawriter$|db_owner$|db_securityadmin$|public$)[a-zA-Z][a-zA-Z0-9]{1,9}$",
-              "validationMessage": "Make sure your login name meets the following requirements- It's a SQL Identifier, and not typical system name (like admin, administrator, sa, root, dbmanager, loginmanager, etc.), or built-in database user or role (like dbo, guest, public, etc.). Make sure your name doesn't contain whitespaces, unicode characters, or nonalphobetic characters, and that it doesn't begin with number or symbols."
+              "validationMessage": "Make sure your login name meets the following requirements- It's a SQL Identifier, and not typical system name (like admin, administrator, sa, root, dbmanager, loginmanager, etc.), or built-in database user or role (like dbo, guest, public, etc.). Make sure your name doesn't contain whitespaces, unicode characters, or nonalphabetic characters, and that it doesn't begin with number or symbols."
             }
           },
           {
@@ -152,7 +152,7 @@
             "constraints": {
               "required": true,
               "regex": "^(?=.*[A-Z])(?=.*[!@#$%])(?=.*[0-9])(?=.*[a-z]).{8,16}$",
-              "validationMessage": "The password must be at least 8 characters, and contain characters from three of the following categories - English uppercase letters, English lowercase letters, numbers (0-9), and non-alphanumeric characters (!, $. #, %, etc.)."
+              "validationMessage": "The password must be 8-16 characters, and contain characters from three of the following categories - English uppercase letters, English lowercase letters, numbers (0-9), and non-alphanumeric characters (!, $. #, %, etc.)."
             },
             "options": {
               "hideConfirmation": true
