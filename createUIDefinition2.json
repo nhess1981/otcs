@@ -136,12 +136,12 @@
             "constraints": {
               "required": true,
               "regex": "^(?!admin$|administrator$|sa$|root$|dbmanager$|loginmanager$|dbo$|guest$|information_schema$|sys$|db_accessadmin$|db_backupoperator$|db_datareader$|db_datawriter$|db_ddladmin$|db_denydatareader$|db_denydatawriter$|db_owner$|db_securityadmin$|public$)[a-zA-Z][a-zA-Z0-9]{1,9}$",
-              "validationMessage": "Only letters and numbers are allowed, and the value must be 2-10 characters long and starts with a letter."
+              "validationMessage": "Make sure your login name meets the following requirements- It's a SQL Identifier, and not typical system name (like admin, administrator, sa, root, dbmanager, loginmanager, etc.), or built-in database user or role (like dbo, guest, public, etc.). Make sure your name doesn't contain whitespaces, unicode characters, or nonalphobetic characters, and that it doesn't begin with number or symbols."
             }
           },
           {
             "name": "vardbserverAdminLoginPassword",
-            "type": "Microsoft.Compute.CredentialsCombo",
+            "type": "Microsoft.Common.PasswordBox",
             "label": {
               "password": "Azure SQL Admin Password",
               "confirmPassword": "Confirm password"
@@ -150,11 +150,13 @@
               "password": "The Password for Azure SQL Admin User."
             },
             "constraints": {
-              "required": true},
+              "required": true,
+              "regex": "^(?=.*[A-Z])(?=.*[!@#$%])(?=.*[0-9])(?=.*[a-z]).{8,16}$",
+              "validationMessage": "The password must be at least 8 characters, and contain characters from three of the following categories - English uppercase letters, English lowercase letters, numbers (0-9), and non-alphanumeric characters (!, $. #, %, etc.)."
+            },
             "options": {
               "hideConfirmation": true
-            },
-             "osPlatform": "Windows"
+            }
           },
           {
             "name": "varsqldatabaseEdition",
