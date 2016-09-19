@@ -44,7 +44,7 @@
       },
       {
         "name": "CSadminPassword",
-        "type": "Microsoft.Compute.CredentialsCombo",
+        "type": "Microsoft.Common.PasswordBox",
         "label": {
           "password": "Password for CS Administrator (Admin)",
           "confirmPassword": "Confirm CS Admin password"
@@ -53,11 +53,13 @@
           "password": "With this password you can login CS and CS admin page."
         },
         "constraints": {
-          "required": true},
+          "required": true,
+          "regex": "^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])|(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*])|(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])|(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])).{8,15}$",
+          "validationMessage": "The password must be at 8-15 characters, and 3 of one number, one lower case letter, one upper case letter, and one special character."
+        },
         "options": {
           "hideConfirmation": true
-        },
-         "osPlatform": "Windows"
+        }
       }
     ],
     "steps": [
