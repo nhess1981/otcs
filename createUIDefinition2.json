@@ -8,11 +8,11 @@
         "type": "Microsoft.Common.TextBox",
         "label": "Virtual machine name",
         "defaultValue": "cs105",
-        "toolTip": "The Name for your Virtual Machine.",
+        "toolTip": "The name for your Virtual Machine.",
         "constraints": {
           "required": true,
           "regex": "^[a-z0-9A-Z]{1,15}$",
-          "validationMessage": "Only low letters and numbers are allowed, and the value must be 1-15 characters long."
+          "validationMessage": "Only letters and numbers are allowed, and the value must be 1-15 characters long."
         }
       },
       {
@@ -98,7 +98,20 @@
                 "Standard_D4",
                 "Standard_D12",
                 "Standard_D13",
-                "Standard_D14"
+                "Standard_D14",
+                "Standard_D2_v2",
+                "Standard_D3_v2",
+                "Standard_D4_v2",
+                "Standard_D5_v2",
+                "Standard_D11_v2",
+                "Standard_D12_v2",
+                "Standard_D13_v2",
+                "Standard_D14_v2",
+                "Standard_D15_v2",
+                "Standard_F2",
+                "Standard_F4",
+                "Standard_F8",
+                "Standard_F16"
               ]
             },
             "osPlatform": "Windows"
@@ -124,7 +137,7 @@
             "constraints": {
               "required": true,
               "regex": "^[a-zA-Z][a-zA-Z0-9]{0,9}$",
-              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+              "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long and starts with a letter."
             }
           },
           {
